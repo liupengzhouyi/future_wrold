@@ -6,10 +6,12 @@ void main() => runApp(new MyApp1());
 class MyApp1 extends StatelessWidget {
 
   _handleAddShelf() async {
-    var result = await HttpUtils.post(
-      '/SystemInformation/getAll',
+    var result = await HttpUtils.request(
+        '/SystemInformation/getAll',
+        method: HttpUtils.POST,
     );
-    // print(result);
+    var rrr = result;
+    print(rrr.toString());
   }
 
   @override
@@ -28,6 +30,5 @@ class MyApp1 extends StatelessWidget {
     );
   }
 
-  // POST 请求
 
 }
