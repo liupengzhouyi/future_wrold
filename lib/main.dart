@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:futurewrold/view/master/landing/landing.dart';
 import 'package:futurewrold/view/teacher/landing/teacherLanding.dart';
 import 'package:futurewrold/view/temp.dart';
 
