@@ -22,9 +22,9 @@ class _MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin{
 
   @override
   void initState() {
-    _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 3000));
+    _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 3500));
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
-    //上面两行代码表示初始化一个Animation控制器， vsync垂直同步，动画执行时间3000毫秒,然后我们设置一个Animation动画，使用上面设置的控制器
+    //上面两行代码表示初始化一个Animation控制器， vsync垂直同步，动画执行时间3500毫秒,然后我们设置一个Animation动画，使用上面设置的控制器
     //监听动画运行状态，当状态为completed时，动画执行结束，跳转首页
     _animation.addStatusListener((status){
       if(status == AnimationStatus.completed){
@@ -45,6 +45,7 @@ class _MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin{
     _controller.dispose();//释放动画
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return FadeTransition(//透明度动画组件
@@ -53,5 +54,3 @@ class _MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin{
     );
   }
 }
-
-

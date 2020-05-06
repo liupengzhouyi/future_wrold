@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/view/temp.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,40 +27,61 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('登陆身份选择'),
+        backgroundColor: Colors.greenAccent,
       ),
-      body: Center(
+      body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+            SizedBox(height: 157.00,),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(width: 10.00,),
+                addMode(context, MyApp1(), "学生登陆", Image.asset("assets/images/image02.png",fit: BoxFit.fill,)),
+                SizedBox(width: 10.00,),
+                addMode(context, MyApp1(), "教师登陆",Image.asset("assets/images/image03.png",fit: BoxFit.fill,)),
+                SizedBox(width: 10.00,),
+                addMode(context, MyApp1(), "管理员登陆", Image.asset("assets/images/image04.png",fit: BoxFit.fill,)),
+                SizedBox(width: 10.00,),
+              ],
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget addMode(BuildContext context, Widget tempWidget, String name, Image image) {
+    return Expanded(
+        flex: 1,
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 100,
+              width: 100,
+              child: image,
+            ),
+            SizedBox(width: 10.00,),
+            MaterialButton(
+              child: new Text(name, style: new TextStyle(color: Colors.black),),
+              color: Colors.lime,
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => tempWidget,
+                    )
+                );
+              },
+            ),
+          ],
+        )
     );
   }
 }

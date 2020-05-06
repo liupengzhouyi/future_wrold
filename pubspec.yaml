@@ -43,6 +43,9 @@ flutter:
 
   assets:
     - assets/images/start.jpg
+    - assets/images/image02.png
+    - assets/images/image03.png
+    - assets/images/image04.png
 
   #  - images/a_dot_ham.jpeg
 
