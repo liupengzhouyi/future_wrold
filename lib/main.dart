@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/view/master/landing/landing.dart';
+import 'package:futurewrold/view/teacher/landing/teacherLanding.dart';
 import 'package:futurewrold/view/temp.dart';
 
 void main() => runApp(MyApp());
@@ -32,8 +34,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('登陆身份选择'),
-        backgroundColor: Colors.greenAccent,
+        title: Text('身份选择'),
+        backgroundColor: Colors.blue,
       ),
       body: Container(
         child: Column(
@@ -46,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(width: 10.00,),
                 addMode(context, MyApp1(), "学生登陆", Image.asset("assets/images/image02.png",fit: BoxFit.fill,)),
                 SizedBox(width: 10.00,),
-                addMode(context, MyApp1(), "教师登陆",Image.asset("assets/images/image03.png",fit: BoxFit.fill,)),
+                addMode(context, LoginHomePage(), "教师登陆",Image.asset("assets/images/image03.png",fit: BoxFit.fill,)),
                 SizedBox(width: 10.00,),
                 addMode(context, MyApp1(), "管理员登陆", Image.asset("assets/images/image04.png",fit: BoxFit.fill,)),
                 SizedBox(width: 10.00,),
@@ -66,9 +68,18 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               height: 100,
               width: 100,
-              child: image,
+              child: Center(
+                  child: Container(
+                    width: 250,
+                    height: 150,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: image,
+                    ),
+                  ),
+              ),
             ),
-            SizedBox(width: 10.00,),
+            SizedBox(width: 20.00,),
             MaterialButton(
               child: new Text(name, style: new TextStyle(color: Colors.black),),
               color: Colors.lime,
