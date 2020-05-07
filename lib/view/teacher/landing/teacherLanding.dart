@@ -8,7 +8,7 @@ import 'package:futurewrold/model/teacher/landing/ReturnTeacherLanding.dart';
 import 'package:futurewrold/model/teacher/landing/TeacherEntity.dart';
 import 'package:futurewrold/model/teacher/landing/TeacherEntityLanding.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
-import 'package:futurewrold/view/teacher/landing/LoginAnimationDemo.dart';
+import 'package:futurewrold/view/temp.dart';
 
 class LoginHomePage extends StatefulWidget {
   @override
@@ -32,13 +32,14 @@ class _LoginHomePageState extends State<LoginHomePage> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              /*Container(
-                height: 120.0,
-                alignment:Alignment.centerLeft,
-                padding: EdgeInsets.only(left:30.0),
-                color: Colors.white,
-                child: Icon(Icons.access_alarm),
-              ),*/
+              Container(
+                width: 250,
+                height: 150,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset('assets/images/image03.png'),
+                ),
+              ),
               Container(
                 color: Colors.white,
                 alignment: Alignment.center,
@@ -111,7 +112,34 @@ class _LoginHomePageState extends State<LoginHomePage> {
               ),
             ),
           ),
+          Padding(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  GestureDetector(
+                    child: Text(
+                      '点击注册',
+                      style: TextStyle(color: Colors.green),
+                    ),
+                    onTap: () {
+                      _toRegisterPage(context);
 
+                    },
+                  ),
+                  GestureDetector(
+                    child: Text(
+                      '点击注册',
+                      style: TextStyle(color: Colors.green),
+                    ),
+                    onTap: () {
+                      _toRegisterPage(context);
+                    },
+                  ),
+                ],
+              ),
+          ),
         ],
       ),
     );
@@ -133,5 +161,13 @@ class _LoginHomePageState extends State<LoginHomePage> {
 
     }
   }
+
+  _toRegisterPage(BuildContext context) async{
+    final preEmail = await Navigator.push(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => new MyApp1()));
+  }
+
 }
 
