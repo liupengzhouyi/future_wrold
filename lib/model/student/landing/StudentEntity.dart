@@ -1,32 +1,32 @@
-class Teacher {
+class Student {
   int id;
   String imageurl;
   int isdelete;
   String name;
   int password;
   String phonenumber;
-  String professionalid;
-  String teachernumber;
+  int prodessionalid;
+  String studentid;
 
-  Teacher(
+  Student(
       {this.id,
         this.imageurl,
         this.isdelete,
         this.name,
         this.password,
         this.phonenumber,
-        this.professionalid,
-        this.teachernumber});
+        this.prodessionalid,
+        this.studentid});
 
-  Teacher.fromJson(Map<String, dynamic> json) {
+  Student.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     imageurl = json['imageurl'];
     isdelete = json['isdelete'];
     name = json['name'];
     password = json['password'];
     phonenumber = json['phonenumber'];
-    professionalid = json['professionalid'];
-    teachernumber = json['teachernumber'];
+    prodessionalid = json['prodessionalid'];
+    studentid = json['studentid'];
   }
 
   Map<String, dynamic> toJson() {
@@ -37,14 +37,14 @@ class Teacher {
     data['name'] = this.name;
     data['password'] = this.password;
     data['phonenumber'] = this.phonenumber;
-    data['professionalid'] = this.professionalid;
-    data['teachernumber'] = this.teachernumber;
+    data['prodessionalid'] = this.prodessionalid;
+    data['studentid'] = this.studentid;
     return data;
   }
 
   @override
   String toString() {
-    return 'Teacher{id: $id, imageurl: $imageurl, isdelete: $isdelete, name: $name, password: $password, phonenumber: $phonenumber, professionalid: $professionalid, teachernumber: $teachernumber}';
+    return 'Student{id: $id, imageurl: $imageurl, isdelete: $isdelete, name: $name, password: $password, phonenumber: $phonenumber, prodessionalid: $prodessionalid, studentid: $studentid}';
   }
 
 

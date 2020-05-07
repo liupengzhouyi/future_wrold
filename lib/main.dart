@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(width: 10.00,),
                 addMode(context, MyApp1(), "学生登陆", Image.asset("assets/images/image02.png",fit: BoxFit.fill,)),
                 SizedBox(width: 10.00,),
-                addMode(context, LoginHomePage(), "教师登陆",Image.asset("assets/images/image03.png",fit: BoxFit.fill,)),
+                addMode(context, TeacherLoginPage(), "教师登陆",Image.asset("assets/images/image03.png",fit: BoxFit.fill,)),
                 SizedBox(width: 10.00,),
                 addMode(context, MyApp1(), "管理员登陆", Image.asset("assets/images/image04.png",fit: BoxFit.fill,)),
                 SizedBox(width: 10.00,),

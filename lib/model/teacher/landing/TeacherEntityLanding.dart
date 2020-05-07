@@ -26,4 +26,11 @@ class TeacherLanding {
     }
     return data;
   }
+
+  @override
+  String toString() {
+    return 'TeacherLanding{password: $password, password1: $password1, password2: $password2, teacher: $teacher}';
+  }
+
+
 }

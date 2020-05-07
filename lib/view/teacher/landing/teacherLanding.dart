@@ -9,19 +9,19 @@ import 'package:futurewrold/model/teacher/landing/ReturnTeacherLanding.dart';
 import 'package:futurewrold/model/teacher/landing/TeacherEntity.dart';
 import 'package:futurewrold/model/teacher/landing/TeacherEntityLanding.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
+import 'package:futurewrold/utils/page/TempPage.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
-import 'package:futurewrold/view/temp.dart';
 import 'package:path_provider/path_provider.dart';
 
-class LoginHomePage extends StatefulWidget {
+class TeacherLoginPage extends StatefulWidget {
   @override
-  _LoginHomePageState createState() {
+  _TeacherLoginPageState createState() {
     // TODO: implement createState
-    return new _LoginHomePageState();
+    return new _TeacherLoginPageState();
   }
 }
 
-class _LoginHomePageState extends State<LoginHomePage> {
+class _TeacherLoginPageState extends State<TeacherLoginPage> {
 
   Widget page;
 
@@ -35,7 +35,6 @@ class _LoginHomePageState extends State<LoginHomePage> {
       body:page,
     );
   }
-
 
   @override
   void initState() {
@@ -187,7 +186,13 @@ class _LoginHomePageState extends State<LoginHomePage> {
       // 保存新的登陆信息
       saveValue(userInformation);
       // 测试读数据
-      _readCounter();
+      //_readCounter();
+      // 页面跳转
+      Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => TempPage(title: '教师登陆成功',),
+          )
+      );
     } else {
       // print("登陆失败");
       landingErrorTips('错误', returnTeacherLanding.why);
@@ -200,9 +205,17 @@ class _LoginHomePageState extends State<LoginHomePage> {
     final preEmail = await Navigator.push(
         context,
         new MaterialPageRoute(
-            builder: (context) => new MyApp1()));
+            builder: (context) => TempPage(title: '教师-注册',)));
   }
 
+  _toRegisterPage2(BuildContext context) async{
+
+
+    final preEmail = await Navigator.push(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => TempPage(title: '教师-找回密码',)));
+  }
 
 
   landingErrorTips(String title, String why) {

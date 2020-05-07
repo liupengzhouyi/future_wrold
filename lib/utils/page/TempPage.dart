@@ -13,7 +13,6 @@ class TempPage extends StatelessWidget {
 
   String title;
 
-
   @override
   Widget build(BuildContext context) {
     // _readCounter();
