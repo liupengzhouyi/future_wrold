@@ -26,6 +26,8 @@ dependencies:
   json_serializable: ^3.3.0
   animatedloginbutton: ^0.1.1
   path_provider: ^1.6.7
+  image_picker: ^0.6.6+1
+  file_picker: ^1.9.0+1
 
 
 
@@ -38,6 +40,8 @@ dev_dependencies:
   json_serializable: ^3.3.0
   animatedloginbutton: ^0.1.1
   path_provider: ^1.6.7
+  image_picker: ^0.6.6+1
+  file_picker: ^1.9.0+1
 
 
 # For information on the generic Dart part of this file, see the

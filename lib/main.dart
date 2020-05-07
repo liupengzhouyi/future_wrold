@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:futurewrold/view/master/landing/masterLanding.dart';
 import 'package:futurewrold/view/student/landing/studentLanding.dart';
 import 'package:futurewrold/view/teacher/landing/teacherLanding.dart';
-import 'package:futurewrold/view/temp.dart';
+
 
 void main() => runApp(MyApp());
 
