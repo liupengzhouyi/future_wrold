@@ -53,7 +53,7 @@ class _MasterLoginPageState extends State<MasterLoginPage> {
               height: 150,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset('assets/images/image03.png'),
+                child: Image.asset('assets/images/image04.png'),
               ),
             ),
             Container(
@@ -122,7 +122,7 @@ class _MasterLoginPageState extends State<MasterLoginPage> {
                   Conservator conservatorParameter = new Conservator();
                   conservatorParameter.phonenumber = userNumber.toString();
                   conservatorLandingParameter.conservator = conservatorParameter;
-                  masterLandingVerification('/student/landing', conservatorLandingParameter);
+                  masterLandingVerification('/Conservator/landing', conservatorLandingParameter);
 
                 },
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/view/master/landing/masterLanding.dart';
 import 'package:futurewrold/view/student/landing/studentLanding.dart';
 import 'package:futurewrold/view/teacher/landing/teacherLanding.dart';
 import 'package:futurewrold/view/temp.dart';
@@ -50,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(width: 10.00,),
                 addMode(context, TeacherLoginPage(), "教师登陆",Image.asset("assets/images/image03.png",fit: BoxFit.fill,)),
                 SizedBox(width: 10.00,),
-                addMode(context, MyApp1(), "管理员登陆", Image.asset("assets/images/image04.png",fit: BoxFit.fill,)),
+                addMode(context, MasterLoginPage(), "管理员登陆", Image.asset("assets/images/image04.png",fit: BoxFit.fill,)),
                 SizedBox(width: 10.00,),
               ],
             ),
