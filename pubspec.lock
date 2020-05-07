@@ -15,6 +15,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.39.8"
+  animatedloginbutton:
+    dependency: "direct main"
+    description:
+      name: animatedloginbutton
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.1"
   archive:
     dependency: transitive
     description:

@@ -1,9 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:animatedloginbutton/animatedloginbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:futurewrold/model/teacher/landing/ReturnTeacherLanding.dart';
 import 'package:futurewrold/model/teacher/landing/TeacherEntity.dart';
 import 'package:futurewrold/model/teacher/landing/TeacherEntityLanding.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/teacher/landing/LoginAnimationDemo.dart';
 
 class LoginHomePage extends StatefulWidget {
   @override
@@ -18,7 +23,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("登录", style: new TextStyle(color: Colors.white)),
+        title: new Text("教师登录", style: new TextStyle(color: Colors.white)),
         iconTheme: new IconThemeData(color: Colors.white),
       ),
       body: Stack(
@@ -27,13 +32,13 @@ class _LoginHomePageState extends State<LoginHomePage> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Container(
+              /*Container(
                 height: 120.0,
                 alignment:Alignment.centerLeft,
                 padding: EdgeInsets.only(left:30.0),
                 color: Colors.white,
                 child: Icon(Icons.access_alarm),
-              ),
+              ),*/
               Container(
                 color: Colors.white,
                 alignment: Alignment.center,
@@ -53,7 +58,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
   TextEditingController unameController = new TextEditingController();
   TextEditingController pwdController = new TextEditingController();
   GlobalKey formKey = new GlobalKey<FormState>();
-
+  final LoginErrorMessageController loginErrorMessageController = LoginErrorMessageController();
 
   Widget buildForm() {
     return Form(
@@ -90,35 +95,23 @@ class _LoginHomePageState extends State<LoginHomePage> {
           // 登录按钮
           Padding(
             padding: const EdgeInsets.only(top: 28.0),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: RaisedButton(
-                    padding: EdgeInsets.all(15.0),
-                    child: Text("登录"),
-                    color: Theme.of(context).primaryColor,
-                    textColor: Colors.white,
-                    onPressed: () {
-                      String userNumber = unameController.text;
-                      String password = pwdController.text;
-                      print('userNumber:' + userNumber);
-                      print('password:' + password);
-                      TeacherLanding teacherLandingParameter = new TeacherLanding();
-                      teacherLandingParameter.password = password;
-                      Teacher teacherParameter = new Teacher();
-                      teacherParameter.teachernumber = userNumber.toString();
-                      teacherLandingParameter.teacher = teacherParameter;
-                      print(teacherLandingParameter.toString());
-                      teacherLandingVerification('/teacher/landing', teacherLandingParameter);
-
-
-
-                    },
-                  ),
-                ),
-              ],
+            child: new Container(
+              child:new AnimatedLoginButton(
+                loginErrorMessageController:loginErrorMessageController,
+                onTap: () async {
+                  String userNumber = unameController.text;
+                  String password = pwdController.text;
+                  TeacherLanding teacherLandingParameter = new TeacherLanding();
+                  teacherLandingParameter.password = password;
+                  Teacher teacherParameter = new Teacher();
+                  teacherParameter.teachernumber = userNumber.toString();
+                  teacherLandingParameter.teacher = teacherParameter;
+                  teacherLandingVerification('/teacher/landing', teacherLandingParameter);
+                },
+              ),
             ),
-          )
+          ),
+
         ],
       ),
     );
@@ -133,6 +126,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
     ReturnTeacherLanding returnTeacherLanding = ReturnTeacherLanding.fromJson(result);
     if (returnTeacherLanding.returnKey == true) {
       print("登陆成功");
+
 
     } else {
       print("登陆失败");
