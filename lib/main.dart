@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/view/student/landing/studentLanding.dart';
 import 'package:futurewrold/view/teacher/landing/teacherLanding.dart';
 import 'package:futurewrold/view/temp.dart';
 
@@ -45,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(width: 10.00,),
-                addMode(context, MyApp1(), "学生登陆", Image.asset("assets/images/image02.png",fit: BoxFit.fill,)),
+                addMode(context, StudentLoginPage(), "学生登陆", Image.asset("assets/images/image02.png",fit: BoxFit.fill,)),
                 SizedBox(width: 10.00,),
                 addMode(context, TeacherLoginPage(), "教师登陆",Image.asset("assets/images/image03.png",fit: BoxFit.fill,)),
                 SizedBox(width: 10.00,),

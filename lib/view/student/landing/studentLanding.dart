@@ -4,12 +4,10 @@ import 'dart:io';
 import 'package:animatedloginbutton/animatedloginbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:futurewrold/model/student/landing/ReturnObject.dart';
+import 'package:futurewrold/model/student/landing/ReturnStudentLanding.dart';
 import 'package:futurewrold/model/student/landing/StudentEntity.dart';
 import 'package:futurewrold/model/student/landing/StudentEntityLanding.dart';
-import 'package:futurewrold/model/teacher/landing/ReturnObject.dart';
-import 'package:futurewrold/model/teacher/landing/ReturnTeacherLanding.dart';
-import 'package:futurewrold/model/teacher/landing/TeacherEntity.dart';
-import 'package:futurewrold/model/teacher/landing/TeacherEntityLanding.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/page/TempPage.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
@@ -163,27 +161,27 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
     );
   }
 
-  studentLandingVerification(String url, TeacherLanding parameter) async {
+  studentLandingVerification(String url, StudentLanding parameter) async {
     var result = await HttpUtils.request(
       url,
       method: HttpUtils.POST,
       data: parameter.toJson(),
     );
-    ReturnTeacherLanding returnTeacherLanding = ReturnTeacherLanding.fromJson(result);
-    if (returnTeacherLanding.returnKey == true) {
+    ReturnStudentLanding returnStudentLanding = ReturnStudentLanding.fromJson(result);
+    if (returnStudentLanding.returnKey == true) {
       print("登陆成功");
 
-      ReturnObject returnObject = returnTeacherLanding.returnObject;
-      Teacher teacher = Teacher.fromJson(returnObject.toJson());
+      ReturnObject returnObject = returnStudentLanding.returnObject;
+      Student student = Student.fromJson(returnObject.toJson());
 
       UserInformation userInformation = new UserInformation();
       userInformation.userType = 3;
       userInformation.landing = 1;
-      userInformation.professionalId = int.parse(teacher.professionalid);
-      userInformation.userName = teacher.name;
-      userInformation.userNumber = teacher.teachernumber;
+      userInformation.professionalId = student.prodessionalid;
+      userInformation.userName = student.name;
+      userInformation.userNumber = student.studentid;
       userInformation.password = parameter.password.toString();
-      userInformation.imageurl = teacher.imageurl;
+      userInformation.imageurl = student.imageurl;
       print(userInformation.toJson().toString());
       //清空原有数据
       clearContent();
@@ -199,7 +197,7 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
       );
     } else {
       // print("登陆失败");
-      landingErrorTips('错误', returnTeacherLanding.why);
+      landingErrorTips('错误', returnStudentLanding.why);
     }
   }
 
