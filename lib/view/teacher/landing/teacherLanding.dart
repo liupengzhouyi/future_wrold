@@ -4,11 +4,14 @@ import 'dart:io';
 import 'package:animatedloginbutton/animatedloginbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:futurewrold/model/teacher/landing/ReturnObject.dart';
 import 'package:futurewrold/model/teacher/landing/ReturnTeacherLanding.dart';
 import 'package:futurewrold/model/teacher/landing/TeacherEntity.dart';
 import 'package:futurewrold/model/teacher/landing/TeacherEntityLanding.dart';
+import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
 import 'package:futurewrold/view/temp.dart';
+import 'package:path_provider/path_provider.dart';
 
 class LoginHomePage extends StatefulWidget {
   @override
@@ -90,12 +93,12 @@ class _LoginHomePageState extends State<LoginHomePage> {
               textInputAction: TextInputAction.next,
               controller: unameController,
               decoration: InputDecoration(
-                  labelText: "用户名或邮箱",
-                  hintText: "用户名或邮箱",
+                  labelText: "教师编号",
+                  hintText: "教师编号",
                   icon: Icon(Icons.person)),
               // 校验用户名
               validator: (v) {
-                return v.trim().length > 0 ? null : "用户名不能为空";
+                return v.trim().length > 0 ? null : "教师编号不能为空";
               }),
           TextFormField(
               autofocus: false,
@@ -169,29 +172,44 @@ class _LoginHomePageState extends State<LoginHomePage> {
     ReturnTeacherLanding returnTeacherLanding = ReturnTeacherLanding.fromJson(result);
     if (returnTeacherLanding.returnKey == true) {
       print("登陆成功");
-
+      ReturnObject returnObject = returnTeacherLanding.returnObject;
+      Teacher teacher = Teacher.fromJson(returnObject.toJson());
+      UserInformation userInformation = new UserInformation();
+      userInformation.landing = 1;
+      userInformation.professionalId = int.parse(teacher.professionalid);
+      userInformation.userName = teacher.name;
+      userInformation.userNumber = teacher.teachernumber;
+      userInformation.password = parameter.password.toString();
+      userInformation.imageurl = teacher.imageurl;
+      print(userInformation.toJson().toString());
+      //清空原有数据
+      clearContent();
+      // 保存新的登陆信息
+      saveValue(userInformation);
+      // 测试读数据
+      _readCounter();
     } else {
-      tips(returnTeacherLanding.why);
-      print("登陆失败");
-      setState(() {
-        page;
-      });
-
+      // print("登陆失败");
+      landingErrorTips('错误', returnTeacherLanding.why);
     }
   }
 
   _toRegisterPage(BuildContext context) async{
+
+
     final preEmail = await Navigator.push(
         context,
         new MaterialPageRoute(
             builder: (context) => new MyApp1()));
   }
 
-  tips(String why) {
+
+
+  landingErrorTips(String title, String why) {
     setState(() {
       page = Center(
         child: AlertDialog(
-          title: Text('错误'), //对话框标题
+          title: Text(title), //对话框标题
           content: SingleChildScrollView(
             //对话框内容部分
             child: ListBody(
@@ -213,6 +231,70 @@ class _LoginHomePageState extends State<LoginHomePage> {
         ),
       );
     });
+  }
+
+  // _getLocalFile函数，获取本地文件目录
+  Future<File> _getLocalFile() async {
+    // 获取本地文档目录
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    print(dir);
+    // 返回本地文件目录
+    return new File('$dir/userInformation.txt');
+  }
+
+  // 保存登陆数据
+  void saveValue(UserInformation userInformation) async {
+    try {
+      File f = await _getLocalFile();
+      IOSink slink = f.openWrite(mode: FileMode.append);
+      slink.write('${userInformation.toString()}');
+      slink.close();
+    } catch (e) {
+      // 写入错误
+      print(e);
+    }
+  }
+
+  // 清空本地保存的文件
+  void clearContent() async {
+    File f = await _getLocalFile();
+    await f.writeAsString('');
+  }
+
+
+  /*
+   * _readCounter函数，读取点击数
+   * 关键字async表示异步操作
+   * 返回值Future类型，表示延迟处理的对象
+   */
+  void _readCounter() async {
+    try {
+      /*
+       * 获取本地文件目录
+       * 关键字await表示等待操作完成
+       */
+      File file = await _getLocalFile();
+      var dir_bool = await file.exists();
+      if (dir_bool) {
+        print('true');
+      } else {
+        print('false');
+        file.create();
+        UserInformation userInformation = new UserInformation();
+        userInformation.landing = 0;
+        saveValue(userInformation);
+        // this.initState();
+      }
+      // 从文件中读取变量作为字符串，一次全部读完存在内存里面
+      var contents = await file.readAsString();
+      print("=====---- :");
+      print(contents);
+      print("=====---- :");
+      var jsonMap = await json.decode(contents);
+      UserInformation userInformation = UserInformation.fromJson(jsonMap);
+      print("=====---- :" + userInformation.toString());
+    } on FileSystemException {
+    }
   }
 
 }
