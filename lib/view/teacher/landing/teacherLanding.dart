@@ -19,6 +19,10 @@ class LoginHomePage extends StatefulWidget {
 }
 
 class _LoginHomePageState extends State<LoginHomePage> {
+
+
+  Widget page;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -26,33 +30,43 @@ class _LoginHomePageState extends State<LoginHomePage> {
         title: new Text("教师登录", style: new TextStyle(color: Colors.white)),
         iconTheme: new IconThemeData(color: Colors.white),
       ),
-      body: Stack(
-        children: <Widget>[
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                width: 250,
-                height: 150,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset('assets/images/image03.png'),
-                ),
-              ),
-              Container(
-                color: Colors.white,
-                alignment: Alignment.center,
-                padding: EdgeInsets.only(left:30.0,right: 30.0),
-                child: new Container(
-                  child: buildForm(),
-                ),
-              ),
+      body:page,
+    );
+  }
 
-            ],
-          ),
-        ],
-      ),
+
+  @override
+  void initState() {
+    initPage();
+  }
+
+  void initPage() {
+    page = Stack(
+      children: <Widget>[
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              width: 250,
+              height: 150,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset('assets/images/image03.png'),
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(left:30.0,right: 30.0),
+              child: new Container(
+                child: buildForm(),
+              ),
+            ),
+
+          ],
+        ),
+      ],
     );
   }
 
@@ -108,6 +122,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                   teacherParameter.teachernumber = userNumber.toString();
                   teacherLandingParameter.teacher = teacherParameter;
                   teacherLandingVerification('/teacher/landing', teacherLandingParameter);
+
                 },
               ),
             ),
@@ -155,9 +170,12 @@ class _LoginHomePageState extends State<LoginHomePage> {
     if (returnTeacherLanding.returnKey == true) {
       print("登陆成功");
 
-
     } else {
+      tips(returnTeacherLanding.why);
       print("登陆失败");
+      setState(() {
+        page;
+      });
 
     }
   }
@@ -167,6 +185,34 @@ class _LoginHomePageState extends State<LoginHomePage> {
         context,
         new MaterialPageRoute(
             builder: (context) => new MyApp1()));
+  }
+
+  tips(String why) {
+    setState(() {
+      page = Center(
+        child: AlertDialog(
+          title: Text('错误'), //对话框标题
+          content: SingleChildScrollView(
+            //对话框内容部分
+            child: ListBody(
+              children: <Widget>[
+                Text(why),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('确定'),
+              onPressed: () {
+                setState(() {
+                  initPage();
+                });
+              },
+            ),
+          ],
+        ),
+      );
+    });
   }
 
 }
