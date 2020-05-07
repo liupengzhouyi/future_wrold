@@ -23,7 +23,6 @@ class LoginHomePage extends StatefulWidget {
 
 class _LoginHomePageState extends State<LoginHomePage> {
 
-
   Widget page;
 
   @override
@@ -175,6 +174,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
       ReturnObject returnObject = returnTeacherLanding.returnObject;
       Teacher teacher = Teacher.fromJson(returnObject.toJson());
       UserInformation userInformation = new UserInformation();
+      userInformation.userType = 2;
       userInformation.landing = 1;
       userInformation.professionalId = int.parse(teacher.professionalid);
       userInformation.userName = teacher.name;
@@ -296,6 +296,5 @@ class _LoginHomePageState extends State<LoginHomePage> {
     } on FileSystemException {
     }
   }
-
 }
 
