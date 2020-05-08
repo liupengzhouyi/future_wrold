@@ -1,22 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:futurewrold/utils/web/HttpUtils.dart';
 
-void main() => runApp(new MyApp1());
+void main() => runApp(new MyApp());
 
-class MyApp1 extends StatelessWidget {
-
-  _handleAddShelf() async {
-    var result = await HttpUtils.request(
-        '/SystemInformation/getAll',
-        method: HttpUtils.POST,
-    );
-    var rrr = result;
-    print(rrr.toString());
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    _handleAddShelf();
     return new MaterialApp(
       title: 'Welcome to Flutter',
       home: new Scaffold(
@@ -29,6 +17,4 @@ class MyApp1 extends StatelessWidget {
       ),
     );
   }
-
-
 }
