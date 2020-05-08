@@ -20,7 +20,6 @@ class _ShowProfessionalInformationState extends State<ShowProfessionalInformatio
 
   @override
   Widget build(BuildContext context) {
-    createPage();
     return new MaterialApp(
       title: 'Welcome to Flutter',
       home: new Scaffold(
@@ -44,6 +43,9 @@ class _ShowProfessionalInformationState extends State<ShowProfessionalInformatio
     );
     String url = "/Professional/getAll";
     getProfessionalInformation(url);
+    setState(() {
+      page;
+    });
   }
 
   getProfessionalInformation(String url)  async {
@@ -52,8 +54,7 @@ class _ShowProfessionalInformationState extends State<ShowProfessionalInformatio
       method: HttpUtils.POST,
     );
     returnProfessionalInformation = ReturnProfessionalInformation.fromJson(result);
-    // print(returnProfessionalInformation.returnObject.length);
-    // print(returnProfessionalInformation.returnObject.elementAt(1));
+    createPage();
   }
 
   createItem(ReturnObject item, Color color) {
