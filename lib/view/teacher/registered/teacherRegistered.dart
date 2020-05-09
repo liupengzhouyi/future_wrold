@@ -18,16 +18,9 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
+
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text("登录"),
-        ),
-        body: TeacherRegisteredPage(),
-      ),
-    );
+    return TeacherRegisteredPage();
   }
 }
 
@@ -61,8 +54,13 @@ class _TeacherRegisteredPageState extends State<TeacherRegisteredPage> {
   @override
   Widget build(BuildContext context) {
     this.initImage();
-    return Scaffold(
-        body: Form(
+    return MaterialApp(
+      home: Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            title: Text("教师注册"),
+          ),
+          body: Form(
             key: _formKey,
             child: ListView(
               padding: EdgeInsets.symmetric(horizontal: 22.0),
@@ -109,7 +107,8 @@ class _TeacherRegisteredPageState extends State<TeacherRegisteredPage> {
                 SizedBox(height: 30.0),
               ],
             ),
-        ),
+          ),
+      ),
     );
   }
 

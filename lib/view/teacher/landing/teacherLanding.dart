@@ -11,6 +11,7 @@ import 'package:futurewrold/model/teacher/landing/TeacherEntityLanding.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/page/TempPage.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/teacher/registered/teacherRegistered.dart';
 import 'package:path_provider/path_provider.dart';
 
 class TeacherLoginPage extends StatefulWidget {
@@ -38,10 +39,10 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
 
   @override
   void initState() {
-    initPage();
+    initPage(context);
   }
 
-  void initPage() {
+  void initPage(BuildContext context) {
     page = Stack(
       children: <Widget>[
         Column(
@@ -61,7 +62,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
               alignment: Alignment.center,
               padding: EdgeInsets.only(left:30.0,right: 30.0),
               child: new Container(
-                child: buildForm(),
+                child: buildForm(context),
               ),
             ),
 
@@ -76,7 +77,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
   GlobalKey formKey = new GlobalKey<FormState>();
   final LoginErrorMessageController loginErrorMessageController = LoginErrorMessageController();
 
-  Widget buildForm() {
+  Widget buildForm(BuildContext context) {
     return Form(
       //设置globalKey，用于后面获取FormState
       key: formKey,
@@ -122,7 +123,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
                   Teacher teacherParameter = new Teacher();
                   teacherParameter.teachernumber = userNumber.toString();
                   teacherLandingParameter.teacher = teacherParameter;
-                  teacherLandingVerification('/teacher/landing', teacherLandingParameter);
+                  teacherLandingVerification(context, '/teacher/landing', teacherLandingParameter);
 
                 },
               ),
@@ -146,7 +147,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
                   ),
                   GestureDetector(
                     child: Text(
-                      '点击注册',
+                      '忘记密码',
                       style: TextStyle(color: Colors.green),
                     ),
                     onTap: () {
@@ -161,7 +162,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
     );
   }
 
-  teacherLandingVerification(String url, TeacherLanding parameter) async {
+  teacherLandingVerification(BuildContext context, String url, TeacherLanding parameter) async {
     var result = await HttpUtils.request(
       url,
       method: HttpUtils.POST,
@@ -195,17 +196,15 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
       );
     } else {
       // print("登陆失败");
-      landingErrorTips('错误', returnTeacherLanding.why);
+      landingErrorTips(context, '错误', returnTeacherLanding.why);
     }
   }
 
   _toRegisterPage(BuildContext context) async{
-
-
     final preEmail = await Navigator.push(
         context,
         new MaterialPageRoute(
-            builder: (context) => TempPage(title: '教师-注册',)));
+            builder: (context) => TeacherRegisteredPage()));
   }
 
   _toRegisterPage2(BuildContext context) async{
@@ -218,7 +217,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
   }
 
 
-  landingErrorTips(String title, String why) {
+  landingErrorTips(BuildContext context, String title, String why) {
     setState(() {
       page = Center(
         child: AlertDialog(
@@ -236,7 +235,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
               child: Text('确定'),
               onPressed: () {
                 setState(() {
-                  initPage();
+                  initPage(context);
                 });
               },
             ),
