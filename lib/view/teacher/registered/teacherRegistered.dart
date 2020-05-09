@@ -3,8 +3,14 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:futurewrold/main.dart';
+import 'package:futurewrold/model/teacher/registered/ReturnTeacherRegistered.dart';
+import 'package:futurewrold/model/teacher/registered/Teacher.dart';
+import 'package:futurewrold/model/teacher/registered/TeacherRegistered.dart';
 import 'package:futurewrold/model/utils/file/image/ReturnObject.dart';
 import 'package:futurewrold/model/utils/file/image/ReturnUploadFile.dart';
+import 'package:futurewrold/utils/page/TempPage.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
 import 'package:futurewrold/view/professional/showProfessionalInformation.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -169,6 +175,7 @@ class _TeacherRegisteredPageState extends State<TeacherRegisteredPage> {
               _formKey.currentState.save();
               //TODO 执行登录方法
               print("$_name + $imageUrl + $_password1 + $_password2 + $_phonenumber + $_teachernumber + $_professionalid");
+              teacherRegistered();
             }
           },
           shape: StadiumBorder(side: BorderSide()),
@@ -177,7 +184,37 @@ class _TeacherRegisteredPageState extends State<TeacherRegisteredPage> {
     );
   }
 
-
+  Future<void> teacherRegistered() async {
+    Teacher teacher = new Teacher();
+    teacher.name = _name;
+    teacher.imageurl = imageUrl;
+    teacher.phonenumber = _phonenumber;
+    teacher.professionalid = _professionalid;
+    teacher.teachernumber = _teachernumber;
+    TeacherRegistered teacherRegistered = new TeacherRegistered();
+    teacherRegistered.password1 = _password1;
+    teacherRegistered.password2 = _password2;
+    teacherRegistered.teacher = teacher;
+    var result = await HttpUtils.request(
+      '/teacher/add',
+      method: HttpUtils.POST,
+      data: teacherRegistered.toJson(),
+    );
+    ReturnTeacherRegistered returnTeacherRegistered = ReturnTeacherRegistered.fromJson(result);
+    if (returnTeacherRegistered.returnKey == true) {
+      Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => MyHomePage(),
+          )
+      );
+    } else {
+      Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => TempPage(title: returnTeacherRegistered.why,),
+          )
+      );
+    }
+  }
 
   TextFormField buildTextFieldName(String myLabelText, String myValidator) {
     return TextFormField(
