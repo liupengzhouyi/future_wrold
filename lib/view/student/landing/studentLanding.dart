@@ -11,6 +11,7 @@ import 'package:futurewrold/model/student/landing/StudentEntityLanding.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/page/TempPage.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/student/registered/studentRegistered.dart';
 import 'package:path_provider/path_provider.dart';
 
 class StudentLoginPage extends StatefulWidget {
@@ -207,7 +208,7 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
     final preEmail = await Navigator.push(
         context,
         new MaterialPageRoute(
-            builder: (context) => TempPage(title: '学生-注册',)));
+            builder: (context) => StudentRegisteredPage()));
   }
 
   _toRegisterPage2(BuildContext context) async{
