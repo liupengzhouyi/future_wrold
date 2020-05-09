@@ -11,6 +11,7 @@ import 'package:futurewrold/model/master/landing/ReturnObject.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/page/TempPage.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/master/registered/masterRegistered.dart';
 import 'package:path_provider/path_provider.dart';
 
 class MasterLoginPage extends StatefulWidget {
@@ -201,7 +202,7 @@ class _MasterLoginPageState extends State<MasterLoginPage> {
     final preEmail = await Navigator.push(
         context,
         new MaterialPageRoute(
-            builder: (context) => TempPage(title: '管理员-注册',)));
+            builder: (context) => MasterRegisteredPage()));
   }
 
   _toRegisterPage2(BuildContext context) async{
