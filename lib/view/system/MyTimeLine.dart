@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/system/ad/ReturnObject.dart';
 import 'package:futurewrold/utils/page/TempPage.dart';
+import 'package:futurewrold/view/system/SystemAdInformation.dart';
 
 class MyTimeLine extends StatefulWidget{
 
@@ -94,7 +95,7 @@ class _TimeLineState extends State<MyTimeLine>{
                               onTap: () {
                                 String title = 'returnObject.id:' + returnObject.id.toString();
                                 Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => TempPage(title: title,),));
+                                    MaterialPageRoute(builder: (context) => SystemADInformation(returnObject.id),));
                               },
                             ),
                           ],
