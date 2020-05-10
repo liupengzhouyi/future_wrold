@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: BotomeMenumPage(),
+        home: MasterFirstPage(),
     );
   }
 }
@@ -17,21 +17,22 @@ class MyApp extends StatelessWidget {
  * 有状态StatefulWidget
  *  继承于 StatefulWidget，通过 State 的 build 方法去构建控件
  */
-class BotomeMenumPage extends StatefulWidget {
+
+class MasterFirstPage extends StatefulWidget {
   ////通过构造方法传值
-  BotomeMenumPage();
+  MasterFirstPage();
 
   //主要是负责创建state
   @override
-  BotomeMenumPageState createState() => BotomeMenumPageState();
+  MasterFirstPageState createState() => MasterFirstPageState();
 }
 
 /**
  * 在 State 中,可以动态改变数据
  * 在 setState 之后，改变的数据会触发 Widget 重新构建刷新
  */
-class BotomeMenumPageState extends State<BotomeMenumPage> {
-  BotomeMenumPageState();
+class MasterFirstPageState extends State<MasterFirstPage> {
+  MasterFirstPageState();
 
   @override
   void initState() {
