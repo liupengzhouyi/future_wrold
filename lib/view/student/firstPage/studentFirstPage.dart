@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/view/system/getAllSystemAD.dart';
 
 
 void main() => runApp(MyApp());
@@ -27,10 +28,6 @@ class StudentFirstPage extends StatefulWidget {
   StudentFirstPageState createState() => StudentFirstPageState();
 }
 
-/**
- * 在 State 中,可以动态改变数据
- * 在 setState 之后，改变的数据会触发 Widget 重新构建刷新
- */
 class StudentFirstPageState extends State<StudentFirstPage> {
   StudentFirstPageState();
 
@@ -77,7 +74,7 @@ class StudentFirstPageState extends State<StudentFirstPage> {
   final pages = [
     ChildItemView("首页"),
     ChildItemView("发现"),
-    ChildItemView("动态"),
+    GetAllSystemAD(),
     ChildItemView("我的")
   ];
 
@@ -109,7 +106,6 @@ class StudentFirstPageState extends State<StudentFirstPage> {
     }
   }
 }
-
 
 //子页面
 class ChildItemView extends StatefulWidget {
