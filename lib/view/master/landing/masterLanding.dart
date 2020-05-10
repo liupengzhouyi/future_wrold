@@ -11,6 +11,7 @@ import 'package:futurewrold/model/master/landing/ReturnObject.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/page/TempPage.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/master/firstPage/masterFirstPage.dart';
 import 'package:futurewrold/view/master/registered/masterRegistered.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -188,7 +189,7 @@ class _MasterLoginPageState extends State<MasterLoginPage> {
       // 页面跳转
       Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => TempPage(title: '管理员登陆成功',),
+            builder: (context) => MasterFirstPage(),
           )
       );
     } else {

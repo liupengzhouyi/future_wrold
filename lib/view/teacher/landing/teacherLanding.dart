@@ -11,6 +11,7 @@ import 'package:futurewrold/model/teacher/landing/TeacherEntityLanding.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/page/TempPage.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/teacher/firstPage/teacherFirstPage.dart';
 import 'package:futurewrold/view/teacher/registered/teacherRegistered.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -191,7 +192,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
       // 页面跳转
       Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => TempPage(title: '教师登陆成功',),
+            builder: (context) => TeacherFirstPage(),
           )
       );
     } else {
