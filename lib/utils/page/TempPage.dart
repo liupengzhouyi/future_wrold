@@ -23,7 +23,19 @@ class TempPage extends StatelessWidget {
           title: new Text('Welcome to Flutter'),
         ),
         body: new Center(
-          child: new Text(title),
+          // child:
+          child: Column(
+            children: <Widget>[
+              new Text(title),
+              RaisedButton(
+                child: Text("Go back"),
+                  onPressed: () {
+                    print('This is 2nd page');
+                    Navigator.pop(context);
+                  }
+              ),
+            ],
+          ),
         ),
       ),
     );
