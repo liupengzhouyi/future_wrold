@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
+import 'package:futurewrold/view/teacher/project/myProject/SelectMyProject.dart';
 import 'package:path_provider/path_provider.dart';
 
 
@@ -42,13 +44,16 @@ class _MyPageState extends State<MyPage> {
 
   void creaetPage() {
     String imageURL = userInformation.imageurl;
-    print('imageURL:' + imageURL);
+    // print('imageURL:' + imageURL);
     page = new Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Image.network(userInformation.imageurl),
+        SizedBox(height: 100,),
         Container(
-            width:72.0,
-            height:72.0,
+            width:172.0,
+            height:172.0,
             decoration:BoxDecoration(
                 shape:BoxShape.circle,
                 image:DecorationImage(
@@ -57,15 +62,71 @@ class _MyPageState extends State<MyPage> {
                 )
             )
         ),
-        Text('Deliver features faster'),
-        Text('Craft beautiful UIs'),
-        Expanded(
-          child: FittedBox(
-            fit: BoxFit.contain, // otherwise the logo will be tiny
-            child: const FlutterLogo(),
-          ),
+        SizedBox(height: 5,),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: Text('姓名：', textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
+            ),
+            Expanded(
+              child: Text(userInformation.userName, textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
+            ),
+          ],
         ),
-        Text('Deliver features faster'),
+        SizedBox(height: 5,),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Text('专业编号', textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
+            ),
+            Expanded(
+              child: Text(userInformation.professionalId.toString(), textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
+            ),
+          ],
+        ),
+        SizedBox(height: 5,),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Text('电话号码', textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
+            ),
+            Expanded(
+              child: Text(userInformation.phoneNumber, textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
+            ),
+          ],
+        ),
+        SizedBox(height: 20,),
+        RaisedButton(
+          color: Colors.blueAccent,
+          child: Text("我的题目"),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10) //设置圆角
+          ),
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => SelectMyProject(),
+                )
+            );
+          }
+        ),
+        SizedBox(height: 20,),
+        RaisedButton(
+          child: Text("添加题目"),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10) //设置圆角
+          ),
+          onPressed: () => print("圆角按钮"),
+        ),
+        SizedBox(height: 20,),
+        RaisedButton(
+          child: Text("修改密码"),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10) //设置圆角
+          ),
+          onPressed: () => print("圆角按钮"),
+        ),
       ],
     );
     setState(() {

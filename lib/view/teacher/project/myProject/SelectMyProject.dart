@@ -29,7 +29,6 @@ class _SelectMyProjectState extends State<SelectMyProject> {
   String url = '/project/getAllByTeacherId';
   TeacherGerOwnProject teacherGerOwnProject;
 
-
   @override
   void initState() {
     readCounter();
@@ -40,7 +39,7 @@ class _SelectMyProjectState extends State<SelectMyProject> {
   Widget build(BuildContext context) {
     // getMyProject();
     return Scaffold(
-      //appBar: AppBar(title: Text('123'),),
+      appBar: AppBar(title: Text('我的题目'),),
       body: Container(
         child: new Center(
             child: page

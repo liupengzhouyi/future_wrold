@@ -6,6 +6,7 @@ class UserInformation {
   String userNumber;
   String password;
   String imageurl;
+  String phoneNumber;
 
   UserInformation(
       {this.landing,
@@ -14,7 +15,9 @@ class UserInformation {
         this.userName,
         this.userNumber,
         this.password,
-        this.imageurl});
+        this.imageurl,
+        this.phoneNumber
+      });
 
   UserInformation.fromJson(Map<String, dynamic> json) {
     landing = json['landing'];
@@ -24,6 +27,7 @@ class UserInformation {
     userNumber = json['userNumber'];
     password = json['password'];
     imageurl = json['imageurl'];
+    phoneNumber = json['phoneNumber'];
   }
 
   Map<String, dynamic> toJson() {
@@ -35,12 +39,13 @@ class UserInformation {
     data['userNumber'] = this.userNumber;
     data['password'] = this.password;
     data['imageurl'] = this.imageurl;
+    data['phoneNumber'] = this.phoneNumber;
     return data;
   }
 
   @override
   String toString() {
-    return '{"landing": $landing, "userType": $userType, "professionalId": $professionalId, "userName": "$userName", "userNumber": "$userNumber", "password": "$password", "imageurl": "$imageurl"}';
+    return '{"landing": $landing, "userType": $userType, "professionalId": $professionalId, "userName": "$userName", "userNumber": "$userNumber", "password": "$password", "imageurl": "$imageurl", "phoneNumber": "$phoneNumber"}';
   }
 
 

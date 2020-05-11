@@ -181,7 +181,8 @@ class _MasterLoginPageState extends State<MasterLoginPage> {
       userInformation.userNumber = conservator.phonenumber;
       userInformation.password = parameter.password.toString();
       userInformation.imageurl = conservator.imageurl;
-      print(userInformation.toJson().toString());
+      userInformation.phoneNumber = conservator.phonenumber;
+          print(userInformation.toJson().toString());
       //清空原有数据
       clearContent();
       // 保存新的登陆信息

@@ -182,6 +182,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
       userInformation.userNumber = teacher.teachernumber;
       userInformation.password = parameter.password.toString();
       userInformation.imageurl = teacher.imageurl;
+      userInformation.phoneNumber = teacher.phonenumber;
       print(userInformation.toJson().toString());
       //清空原有数据
       clearContent();

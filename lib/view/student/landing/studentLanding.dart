@@ -184,7 +184,8 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
       userInformation.userNumber = student.studentid;
       userInformation.password = parameter.password.toString();
       userInformation.imageurl = student.imageurl;
-      print(userInformation.toJson().toString());
+      userInformation.phoneNumber = student.phonenumber;
+          print(userInformation.toJson().toString());
       //清空原有数据
       clearContent();
       // 保存新的登陆信息
