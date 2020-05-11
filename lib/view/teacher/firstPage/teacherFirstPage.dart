@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/view/system/getAllSystemAD.dart';
+import 'package:futurewrold/view/teacher/project/myProject/SelectMyProject.dart';
 
 
 void main() => runApp(MyApp());
@@ -72,8 +74,8 @@ class TeacherFirstPageState extends State<TeacherFirstPage> {
   final pages = [
     ChildItemView("首页"),
     ChildItemView("发现"),
-    ChildItemView("动态"),
-    ChildItemView("我的")
+    GetAllSystemAD(),
+    SelectMyProject()
   ];
 
   Widget buildBottomTabScaffold() {

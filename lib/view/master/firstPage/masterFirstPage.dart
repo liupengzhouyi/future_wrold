@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/view/system/getAllSystemAD.dart';
 
 
 void main() => runApp(MyApp());
@@ -77,7 +78,7 @@ class MasterFirstPageState extends State<MasterFirstPage> {
   final pages = [
     ChildItemView("首页"),
     ChildItemView("发现"),
-    ChildItemView("动态"),
+    GetAllSystemAD(),
     ChildItemView("我的")
   ];
 

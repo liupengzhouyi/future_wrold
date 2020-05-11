@@ -64,7 +64,7 @@ class _SystemADInformationState extends State<SystemADInformation> {
         crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Padding(
-              padding: new EdgeInsets.only(left: 20.0, top: 5.0),
+              padding: new EdgeInsets.only(left: 5.0, top: 5.0),
               child: new Text(
                 returnObject.title,
                 style: new TextStyle(
