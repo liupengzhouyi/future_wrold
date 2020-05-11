@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:futurewrold/view/system/getAllSystemAD.dart';
+import 'package:futurewrold/view/teacher/myInformation/MyPage.dart';
 import 'package:futurewrold/view/teacher/project/myProject/PorjectCard.dart';
 import 'package:futurewrold/view/teacher/project/myProject/SelectMyProject.dart';
 import 'package:futurewrold/model/teacher/project/getMyPorject/ReturnObject.dart';
@@ -75,9 +76,9 @@ class TeacherFirstPageState extends State<TeacherFirstPage> {
   //点击导航项是要显示的页面
   final pages = [
     ChildItemView("首页"),
-    ProjectCard(new ReturnObject()),
+    SelectMyProject(),
     GetAllSystemAD(),
-    SelectMyProject()
+    MyPage()
   ];
 
   Widget buildBottomTabScaffold() {

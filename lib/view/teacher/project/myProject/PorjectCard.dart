@@ -9,7 +9,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -80,12 +79,6 @@ class _ProjectCardState extends State<ProjectCard> {
                                   ),
                                 ),
                               ),
-                              new Text(
-                                'Kandersteg, Switzerland',
-                                style: new TextStyle(
-                                  color: Colors.grey[500],
-                                ),
-                              ),
                             ],
                           ),
                         ),
@@ -96,9 +89,9 @@ class _ProjectCardState extends State<ProjectCard> {
                     child: new Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        buildButtonColumn(Icons.file_download, 'download'),
-                        buildButtonColumn(Icons.delete_forever, 'dalete'),
-                        buildButtonColumn(Icons.call_made, 'Approve'),
+                        buildButtonColumn(Icons.file_download, '下载'),
+                        buildButtonColumn(Icons.delete_forever, '删除'),
+                        buildButtonColumn(Icons.call_made, '申请信息'),
                       ],
                     ),
                   ),

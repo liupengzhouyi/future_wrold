@@ -74,6 +74,7 @@ class _SelectMyProjectState extends State<SelectMyProject> {
       var jsonMap = await json.decode(contents);
       setState(() {
         userInformation = UserInformation.fromJson(jsonMap);
+        print(userInformation.toString());
         teacherGerOwnProject = new TeacherGerOwnProject();
         teacherGerOwnProject.teacherid = int.parse(userInformation.userNumber);
         getMyProject();
@@ -82,8 +83,6 @@ class _SelectMyProjectState extends State<SelectMyProject> {
     } on FileSystemException {
     }
   }
-
-
 
   // 保存登陆数据
   void saveValue(UserInformation userInformation) async {
