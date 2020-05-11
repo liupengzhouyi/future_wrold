@@ -2,9 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/teacher/project/getMyPorject/ReturnObject.dart';
+import 'package:futurewrold/model/teacher/project/getMyPorject/ReturnTeacherGerOwnProject.dart';
 import 'package:futurewrold/model/teacher/project/getMyPorject/TeacherGerOwnProject.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/teacher/project/myProject/ShowProjectList.dart';
 import 'package:path_provider/path_provider.dart';
 
 
@@ -28,6 +31,11 @@ class _SelectMyProjectState extends State<SelectMyProject> {
 
 
   @override
+  void initState() {readCounter();}
+
+  void init() {getMyProject();}
+
+  @override
   Widget build(BuildContext context) {
     init();
     return Container(
@@ -43,8 +51,30 @@ class _SelectMyProjectState extends State<SelectMyProject> {
       method: HttpUtils.POST,
       data: teacherGerOwnProject.toJson(),
     );
-    print('result:');
-    print(result);
+    ReturnTeacherGerOwnProject returnTeacherGerOwnProject = ReturnTeacherGerOwnProject.fromJson(result);
+    if (returnTeacherGerOwnProject.returnKey == false) {
+      setState(() {
+        page = new Center(
+            child: Column(
+              children: <Widget>[
+                new Icon(Icons.error, size: 123, color: Colors.red,),
+                new Text(returnTeacherGerOwnProject.why),
+              ],
+            ),
+        );
+      });
+    } else {
+      List<ReturnObject> list = new List<ReturnObject>();
+      for(ReturnObject item in list) {
+        // 查看详情 --> 文件下载
+        // 申请数据 --> 批准申请
+        // 状态
+
+      }
+      setState(() {
+        page = ExpansionTileSample();
+      });
+    }
   }
 
 
@@ -95,15 +125,6 @@ class _SelectMyProjectState extends State<SelectMyProject> {
       // 写入错误
       print(e);
     }
-  }
-
-  @override
-  void initState() {
-    readCounter();
-  }
-
-  void init() {
-    getMyProject();
   }
 
 }
