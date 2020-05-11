@@ -7,7 +7,7 @@ import 'package:futurewrold/model/teacher/project/getMyPorject/ReturnTeacherGerO
 import 'package:futurewrold/model/teacher/project/getMyPorject/TeacherGerOwnProject.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
-import 'package:futurewrold/view/teacher/project/myProject/ShowProjectList.dart';
+import 'package:futurewrold/view/teacher/project/myProject/PorjectCard.dart';
 import 'package:path_provider/path_provider.dart';
 
 
@@ -31,50 +31,22 @@ class _SelectMyProjectState extends State<SelectMyProject> {
 
 
   @override
-  void initState() {readCounter();}
-
-  void init() {getMyProject();}
+  void initState() {
+    readCounter();
+    // getMyProject();
+  }
 
   @override
   Widget build(BuildContext context) {
-    init();
-    return Container(
-      child: new Center(
-        child: page
+    // getMyProject();
+    return Scaffold(
+      //appBar: AppBar(title: Text('123'),),
+      body: Container(
+        child: new Center(
+            child: page
+        ),
       ),
     );
-  }
-
-  getMyProject() async {
-    var result = await HttpUtils.request(
-      url,
-      method: HttpUtils.POST,
-      data: teacherGerOwnProject.toJson(),
-    );
-    ReturnTeacherGerOwnProject returnTeacherGerOwnProject = ReturnTeacherGerOwnProject.fromJson(result);
-    if (returnTeacherGerOwnProject.returnKey == false) {
-      setState(() {
-        page = new Center(
-            child: Column(
-              children: <Widget>[
-                new Icon(Icons.error, size: 123, color: Colors.red,),
-                new Text(returnTeacherGerOwnProject.why),
-              ],
-            ),
-        );
-      });
-    } else {
-      List<ReturnObject> list = new List<ReturnObject>();
-      for(ReturnObject item in list) {
-        // 查看详情 --> 文件下载
-        // 申请数据 --> 批准申请
-        // 状态
-
-      }
-      setState(() {
-        page = ExpansionTileSample();
-      });
-    }
   }
 
 
@@ -87,14 +59,11 @@ class _SelectMyProjectState extends State<SelectMyProject> {
     return new File('$dir/userInformation.txt');
   }
 
-  readCounter() async {
+  void readCounter() async {
     try {
       File file = await _getLocalFile();
       var dir_bool = await file.exists();
-      if (dir_bool) {
-        // print('true');
-      } else {
-        // print('false');
+      if (!dir_bool) {
         file.create();
         userInformation = new UserInformation();
         userInformation.landing = 0;
@@ -102,17 +71,19 @@ class _SelectMyProjectState extends State<SelectMyProject> {
       }
       // 从文件中读取变量作为字符串，一次全部读完存在内存里面
       var contents = await file.readAsString();
-      // print("=====---- :");
       var jsonMap = await json.decode(contents);
       setState(() {
         userInformation = UserInformation.fromJson(jsonMap);
         teacherGerOwnProject = new TeacherGerOwnProject();
         teacherGerOwnProject.teacherid = int.parse(userInformation.userNumber);
+        getMyProject();
+        page;
       });
     } on FileSystemException {
     }
-    print('userInformation.toString():' + userInformation.toString());
   }
+
+
 
   // 保存登陆数据
   void saveValue(UserInformation userInformation) async {
@@ -127,4 +98,38 @@ class _SelectMyProjectState extends State<SelectMyProject> {
     }
   }
 
+  void getMyProject() async {
+    var result = await HttpUtils.request(
+      url,
+      method: HttpUtils.POST,
+      data: teacherGerOwnProject.toJson(),
+    );
+    ReturnTeacherGerOwnProject returnTeacherGerOwnProject = ReturnTeacherGerOwnProject.fromJson(result);
+    if (returnTeacherGerOwnProject.returnKey == false) {
+      print('123456');
+      page = new Center(
+        child: Column(
+          children: <Widget>[
+            new Icon(Icons.error, size: 123, color: Colors.red,),
+            new Text(returnTeacherGerOwnProject.why),
+          ],
+        ),
+      );
+    } else {
+      List<ReturnObject> list;
+      list = returnTeacherGerOwnProject.returnObject;
+      List<Widget> lpList = new List<Widget>();
+      for(ReturnObject item in list) {
+        lpList.add(new ProjectCard(item));
+      }
+      page = Container(
+        child: new ListView(
+          children: lpList,
+        ),
+      );
+    }
+    setState(() {
+      page = page;
+    });
+  }
 }
