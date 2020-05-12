@@ -155,7 +155,14 @@ class _TeacherAddProjectPageState extends State<TeacherAddProjectPage> {
     var result = await HttpUtils.request(
       '/project/add',
       method: HttpUtils.POST,
-      data: teacherAddProject.toJson(),
+      data: {
+        "fileurl": teacherAddProject.fileurl,
+        "id": 0,
+        "isselect": 0,
+        "studentnumber": "",
+        "teacherid": teacherAddProject.teacherid,
+        "title": teacherAddProject.title
+      },
     );
     ReturnTeacherAddProject returnTeacherAddProject = ReturnTeacherAddProject.fromJson(result);
     if (returnTeacherAddProject.returnKey == true) {

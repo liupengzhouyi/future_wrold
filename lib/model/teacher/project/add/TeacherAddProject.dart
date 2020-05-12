@@ -33,4 +33,10 @@ class TeacherAddProject {
     data['title'] = this.title;
     return data;
   }
+
+  String toJsonString() {
+    return '{"fileurl": "$fileurl", "id": "$id", "isselect": "$isselect", "studentnumber": "$studentnumber", "teacherid": "$teacherid", "title": "$title"}';
+  }
+
+
 }
