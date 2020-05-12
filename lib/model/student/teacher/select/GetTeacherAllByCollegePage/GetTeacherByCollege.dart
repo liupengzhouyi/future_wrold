@@ -25,4 +25,16 @@ class GetTeacherByCollege {
     data['professional'] = this.professional;
     return data;
   }
+  Map<String, dynamic> toMyJson() {
+    String ss = '"' + number  + '"';
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['college'] = '"' + '"';
+    data['department'] = '"' + '"';
+    data['id'] = 0;
+    data['number'] = ss;
+    data['professional'] = '"' + '"';
+    return data;
+  }
+
+
 }
