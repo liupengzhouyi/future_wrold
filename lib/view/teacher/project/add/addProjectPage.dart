@@ -8,6 +8,7 @@ import 'package:futurewrold/model/utils/file/image/ReturnObject.dart';
 import 'package:futurewrold/model/teacher/project/add/ReturnTeacherAddProject.dart';
 import 'package:futurewrold/model/teacher/project/add/TeacherAddProject.dart';
 import 'package:futurewrold/model/utils/file/image/ReturnUploadFile.dart';
+import 'package:futurewrold/utils/page/TempPage.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
 
 class TeacherAddProjectPage extends StatefulWidget {
@@ -166,11 +167,19 @@ class _TeacherAddProjectPageState extends State<TeacherAddProjectPage> {
     );
     ReturnTeacherAddProject returnTeacherAddProject = ReturnTeacherAddProject.fromJson(result);
     if (returnTeacherAddProject.returnKey == true) {
-      print('添加成功');
-
+      teacherAddProject = new TeacherAddProject();
+      lpFileName = "未上传文件";
+      Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => TempPage(title: "Success",),
+          )
+      );
     } else {
-      print('添加失败');
-
+      Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => TempPage(title: "Error",),
+          )
+      );
     }
   }
 

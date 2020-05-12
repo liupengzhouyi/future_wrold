@@ -114,6 +114,7 @@ class _MyPageState extends State<MyPage> {
         ),
         SizedBox(height: 20,),
         RaisedButton(
+          color: Colors.lightGreenAccent,
           child: Text("添加题目"),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10) //设置圆角
