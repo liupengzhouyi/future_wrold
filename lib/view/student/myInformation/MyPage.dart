@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
+import 'package:futurewrold/view/student/teacher/select/getTeacherAllByCollege.dart';
+import 'package:futurewrold/view/student/teacher/select/getTeacherByProfessional.dart';
 import 'package:futurewrold/view/teacher/project/add/addProjectPage.dart';
 import 'package:futurewrold/view/teacher/project/myProject/SelectMyProject.dart';
 import 'package:path_provider/path_provider.dart';
@@ -134,6 +136,34 @@ class _MyPageState extends State<MyPage> {
               borderRadius: BorderRadius.circular(10) //设置圆角
           ),
           onPressed: () => print("圆角按钮"),
+        ),
+        SizedBox(height: 20,),
+        RaisedButton(
+          child: Text("查看专业教师"),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10) //设置圆角
+          ),
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => GetTeacherByProfessionalPage(userInformation.professionalId.toString()),
+                )
+            );
+          },
+        ),
+        SizedBox(height: 20,),
+        RaisedButton(
+          child: Text("查看学院教师"),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10) //设置圆角
+          ),
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => GetTeacherAllByCollegePage(userInformation.professionalId.toString()),
+                )
+            );
+          },
         ),
       ],
     );
