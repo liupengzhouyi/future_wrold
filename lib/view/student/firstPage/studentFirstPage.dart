@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/view/student/myInformation/MyPage.dart';
 import 'package:futurewrold/view/system/getAllSystemAD.dart';
 
 
@@ -75,7 +76,7 @@ class StudentFirstPageState extends State<StudentFirstPage> {
     ChildItemView("首页"),
     ChildItemView("发现"),
     GetAllSystemAD(),
-    ChildItemView("我的")
+    MyPage()
   ];
 
   Widget buildBottomTabScaffold() {
