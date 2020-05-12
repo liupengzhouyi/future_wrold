@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/student/teacher/select/GetTeacherByProfessionalPage/ReturnObject.dart';
+import 'package:futurewrold/model/student/teacher/select/GetTeacherByProfessionalPage/GetTeacherByProfessional.dart';
+import 'package:futurewrold/model/student/teacher/select/GetTeacherByProfessionalPage/ReturnGetTeacherByProfessional.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
 
 class GetTeacherByProfessionalPage extends StatefulWidget {
 
@@ -14,11 +18,15 @@ class GetTeacherByProfessionalPage extends StatefulWidget {
 
 class _GetTeacherByProfessionalPageState extends State<GetTeacherByProfessionalPage> {
 
+  _GetTeacherByProfessionalPageState(this.professionalid);
+
   String professionalid;
 
+  Widget page;
 
   @override
   Widget build(BuildContext context) {
+    getData();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -29,7 +37,25 @@ class _GetTeacherByProfessionalPageState extends State<GetTeacherByProfessionalP
       ),
     );
   }
-  _GetTeacherByProfessionalPageState(this.professionalid);
 
+  getData() async {
+    GetTeacherByProfessional getTeacherByProfessional = new GetTeacherByProfessional();
+    getTeacherByProfessional.professionalid = this.professionalid;
+    var result = await HttpUtils.request(
+      '/teacher/getAllByProfessional',
+      method: HttpUtils.POST,
+      data: getTeacherByProfessional.toJson(),
+    );
+    ReturnGetTeacherByProfessional returnGetTeacherByProfessional = ReturnGetTeacherByProfessional.fromJson(result);
+    if (returnGetTeacherByProfessional.returnKey == true) {
+      List<ReturnObject> list = returnGetTeacherByProfessional.returnObject;
+
+    } else {
+      setState(() {
+        page;
+        print('no data');
+      });
+    }
+  }
 
 }
