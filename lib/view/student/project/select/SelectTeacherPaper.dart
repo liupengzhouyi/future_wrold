@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/student/project/select/ReturnObject.dart';
+import 'package:futurewrold/model/student/project/select/ReturnSelectTeacherPaperEntity.dart';
 import 'package:futurewrold/model/student/project/select/SelectTeacherPaperEntity.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
 
@@ -49,13 +51,25 @@ class _SelectTeacherPaperState extends State<SelectTeacherPaper> {
       data: selectTeacherPaperEntity.toJson(),
     );
     print(result);
-    /*ReturnSelectTeacherByNumber returnSelectTeacherByNumber = ReturnSelectTeacherByNumber.fromJson(result);
-    if (returnSelectTeacherByNumber.returnKey == true) {
-      ReturnObject returnObject = returnSelectTeacherByNumber.returnObject;
-      createSuccessPage(returnObject);
+    ReturnSelectTeacherPaperEntity returnSelectTeacherPaperEntity = ReturnSelectTeacherPaperEntity.fromJson(result);
+    if (returnSelectTeacherPaperEntity.returnKey == true) {
+      if (returnSelectTeacherPaperEntity.returnObject.length == 0) {
+        List<ReturnObject> list = returnSelectTeacherPaperEntity.returnObject;
+        createSuccessPage(list);
+      } else {
+        createErrorPage();
+      }
     } else {
       createErrorPage();
-    }*/
+    }
+  }
+
+  createSuccessPage(List<ReturnObject> list) {
+
+  }
+
+  createErrorPage() {
+    page = Text('没有数据');
   }
 
 }
