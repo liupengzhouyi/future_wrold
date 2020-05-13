@@ -27,12 +27,11 @@ class _TeacherCardState extends State<TeacherCard> {
     return Container(
       child: new ListTile(
         leading: new CircleAvatar(
-            backgroundColor: Color(0xffff0000),
-            radius: 50.0,
-            child: new Image.network(returnObject.imageurl)
+            backgroundImage: NetworkImage(returnObject.imageurl),
         ),
         title: new Text(returnObject.name),
         subtitle: new Text(returnObject.professionalid),
+        trailing: Icon(Icons.keyboard_arrow_right),
         onTap: () => {},
       ),
     );
