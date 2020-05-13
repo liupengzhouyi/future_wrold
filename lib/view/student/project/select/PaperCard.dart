@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/student/project/select/ReturnObject.dart';
+import 'package:futurewrold/view/student/project/applicationInformation/ApplicationInformationPage.dart';
 
 class PaperCard extends StatefulWidget {
 
@@ -42,7 +43,7 @@ class _PaperCardState extends State<PaperCard> {
 
     return Container(
       color: Colors.white,
-      height: 150,
+      height: 180,
       alignment: Alignment.center,
       child: new Padding(
         padding: new EdgeInsets.only(left: 5.0, top: 5.0),
@@ -70,9 +71,9 @@ class _PaperCardState extends State<PaperCard> {
                   child: new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      buildButtonColumn(Icons.file_download, '下载'),
-                      buildButtonColumn(Icons.verified_user, '申请'),
-                      buildButtonColumn(Icons.call_made, '申请信息'),
+                      buildButtonColumn(Icons.file_download, '下载', 1),
+                      buildButtonColumn(Icons.verified_user, '申请', 2),
+                      buildButtonColumn(Icons.call_made, '申请信息', 3),
                     ],
                   ),
                 ),
@@ -83,15 +84,23 @@ class _PaperCardState extends State<PaperCard> {
     );
   }
 
-  Column buildButtonColumn(IconData icon, String label) {
+  Column buildButtonColumn(IconData icon, String label, int index) {
     Color color = Colors.blue;
     return new Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        new Icon(icon, color: color),
+        new IconButton(
+          icon: new Icon(icon, color: color),
+          onPressed: () {
+            if (index == 3) {
+              selectApplicationInformation();
+            }
+          },
+          color: Colors.blueAccent,
+          highlightColor: Colors.red,
+        ),
         new Container(
-          margin: const EdgeInsets.only(top: 8.0),
           child: new Text(
             label,
             style: new TextStyle(
@@ -104,4 +113,13 @@ class _PaperCardState extends State<PaperCard> {
       ],
     );
   }
+
+  selectApplicationInformation() {
+    Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ApplicationInformationPage(returnObject.id.toString(), returnObject.title),
+        )
+    );
+  }
+
 }
