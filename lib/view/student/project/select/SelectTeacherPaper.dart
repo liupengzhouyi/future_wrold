@@ -3,26 +3,31 @@ import 'package:futurewrold/model/student/project/select/ReturnObject.dart';
 import 'package:futurewrold/model/student/project/select/ReturnSelectTeacherPaperEntity.dart';
 import 'package:futurewrold/model/student/project/select/SelectTeacherPaperEntity.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/student/project/select/PaperListView.dart';
 
 class SelectTeacherPaper extends StatefulWidget {
 
-  SelectTeacherPaper(this.teachernumber);
+  SelectTeacherPaper(this.teachernumber, this.teachername);
 
   String teachernumber;
 
+  String teachername;
+
   @override
-  _SelectTeacherPaperState createState() => _SelectTeacherPaperState(this.teachernumber);
+  _SelectTeacherPaperState createState() => _SelectTeacherPaperState(this.teachernumber, this.teachername);
 
 
 }
 
 class _SelectTeacherPaperState extends State<SelectTeacherPaper> {
 
-  _SelectTeacherPaperState(this.teachernumber);
+  _SelectTeacherPaperState(this.teachernumber, this.teachername);
 
   SelectTeacherPaperEntity selectTeacherPaperEntity = new SelectTeacherPaperEntity();
 
   String teachernumber;
+
+  String teachername;
 
   Widget page;
 
@@ -36,13 +41,12 @@ class _SelectTeacherPaperState extends State<SelectTeacherPaper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("题目列表"),),
+      appBar: AppBar(title: Text("$teachername" + "老师的题目列表"),),
       body: Container(
         child: page,
       ),
     );
   }
-
 
   Future<void> getData() async {
     var result = await HttpUtils.request(
@@ -54,10 +58,10 @@ class _SelectTeacherPaperState extends State<SelectTeacherPaper> {
     ReturnSelectTeacherPaperEntity returnSelectTeacherPaperEntity = ReturnSelectTeacherPaperEntity.fromJson(result);
     if (returnSelectTeacherPaperEntity.returnKey == true) {
       if (returnSelectTeacherPaperEntity.returnObject.length == 0) {
+        createErrorPage();
+      } else {
         List<ReturnObject> list = returnSelectTeacherPaperEntity.returnObject;
         createSuccessPage(list);
-      } else {
-        createErrorPage();
       }
     } else {
       createErrorPage();
@@ -65,7 +69,10 @@ class _SelectTeacherPaperState extends State<SelectTeacherPaper> {
   }
 
   createSuccessPage(List<ReturnObject> list) {
-
+    page = PaperListView(list, teachername);
+    setState(() {
+      page;
+    });
   }
 
   createErrorPage() {
