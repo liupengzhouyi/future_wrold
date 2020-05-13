@@ -48,9 +48,9 @@ class _MyPageState extends State<MyPage> {
   void creaetPage() {
     String imageURL = userInformation.imageurl;
     // print('imageURL:' + imageURL);
-    page = new Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
+    page = new ListView(
+      // crossAxisAlignment: CrossAxisAlignment.center,
+      // mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Image.network(userInformation.imageurl),
         SizedBox(height: 100,),

@@ -59,5 +59,4 @@ class _GetTeacherAllByCollegePageState extends State<GetTeacherAllByCollegePage>
       });
     }
   }
-
 }
