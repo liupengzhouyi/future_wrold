@@ -3,6 +3,7 @@ import 'package:futurewrold/model/student/teacher/information/ReturnObject.dart'
 import 'package:futurewrold/model/student/teacher/information/ReturnSelectTeacherByNumber.dart';
 import 'package:futurewrold/model/student/teacher/information/SelectTeacherByNumber.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/student/project/select/SelectTeacherPaper.dart';
 
 class TeacherInformationPage extends StatefulWidget {
 
@@ -94,7 +95,7 @@ class _TeacherInformationPageState extends State<TeacherInformationPage> {
             onPressed: () {
               Navigator.of(context).push(
                   MaterialPageRoute(
-                    // builder: (context) => SelectMyProject(),
+                    builder: (context) => SelectTeacherPaper(returnObject.teachernumber),
                   )
               );
             }
