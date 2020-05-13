@@ -4,6 +4,8 @@ import 'package:futurewrold/model/student/teacher/select/GetTeacherAllByCollegeP
 import 'package:futurewrold/model/student/teacher/select/GetTeacherAllByCollegePage/GetTeacherByCollege.dart';
 import 'package:futurewrold/model/student/teacher/select/GetTeacherAllByCollegePage/ReturnGetTeacherByCollege.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/student/teacher/select/college/model/TeacherListView.dart';
+
 
 
 class GetTeacherAllByCollegePage extends StatefulWidget {
@@ -25,16 +27,23 @@ class _GetTeacherAllByCollegePageState extends State<GetTeacherAllByCollegePage>
 
   Widget page;
 
+
+  @override
+  void initState() {
+    getData();
+    page = new Icon(Icons.autorenew, color: Colors.yellow, size: 24,);
+  }
+
   @override
   Widget build(BuildContext context) {
-    getData();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("学院教师"),
       ),
       body: Form(
-        child: Text('学院教师页面'),
+        child: page,
       ),
     );
   }
@@ -51,7 +60,9 @@ class _GetTeacherAllByCollegePageState extends State<GetTeacherAllByCollegePage>
     ReturnGetTeacherByCollege returnGetTeacherByCollege = ReturnGetTeacherByCollege.fromJson(result);
     if (returnGetTeacherByCollege.returnKey == true) {
       List<ReturnObject> list = returnGetTeacherByCollege.returnObject;
-
+      setState(() {
+        page = TeacherListView(list);
+      });
     } else {
       setState(() {
         page;

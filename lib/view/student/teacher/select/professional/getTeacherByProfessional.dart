@@ -3,6 +3,8 @@ import 'package:futurewrold/model/student/teacher/select/GetTeacherByProfessiona
 import 'package:futurewrold/model/student/teacher/select/GetTeacherByProfessionalPage/GetTeacherByProfessional.dart';
 import 'package:futurewrold/model/student/teacher/select/GetTeacherByProfessionalPage/ReturnGetTeacherByProfessional.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/student/teacher/select/professional/model/TeacherListView.dart';
+
 
 class GetTeacherByProfessionalPage extends StatefulWidget {
 
@@ -25,15 +27,20 @@ class _GetTeacherByProfessionalPageState extends State<GetTeacherByProfessionalP
   Widget page;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     getData();
+    page = new Icon(Icons.autorenew, color: Colors.yellow, size: 24,);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("专业教师"),
       ),
       body: Form(
-        child: Text('专业教师页面'),
+        child: page,
       ),
     );
   }
@@ -49,7 +56,9 @@ class _GetTeacherByProfessionalPageState extends State<GetTeacherByProfessionalP
     ReturnGetTeacherByProfessional returnGetTeacherByProfessional = ReturnGetTeacherByProfessional.fromJson(result);
     if (returnGetTeacherByProfessional.returnKey == true) {
       List<ReturnObject> list = returnGetTeacherByProfessional.returnObject;
-
+      setState(() {
+        page = TeacherListView(list);
+      });
     } else {
       setState(() {
         page;
