@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:futurewrold/model/student/teacher/select/GetTeacherByProfessionalPage/ReturnObject.dart';
+import 'package:futurewrold/view/student/teacher/information/teacherInformationPage.dart';
 
 class TeacherCard extends StatefulWidget {
 
@@ -32,7 +33,13 @@ class _TeacherCardState extends State<TeacherCard> {
         title: new Text(returnObject.name),
         subtitle: new Text(returnObject.professionalid),
         trailing: Icon(Icons.keyboard_arrow_right),
-        onTap: () => {},
+        onTap: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => TeacherInformationPage(returnObject.teachernumber),
+              )
+          );
+        },
       ),
     );
   }
