@@ -76,21 +76,21 @@ class _TeacherInformationPageState extends State<TeacherInformationPage> {
           leading: new CircleAvatar(
             child: Icon(Icons.school, size: 24, ),
           ),
-          title: new Text(returnObject.teachernumber, style: TextStyle(fontSize: 24),),
+          title: new Text("教师编号：" + returnObject.teachernumber, style: TextStyle(fontSize: 24),),
         ),
         SizedBox(height: 5,),
         ListTile(
           leading: new CircleAvatar(
             child: Icon(Icons.account_balance, size: 24, ),
           ),
-          title: new Text(returnObject.professionalid, style: TextStyle(fontSize: 24),),
+          title: new Text("专业编号：" + returnObject.professionalid, style: TextStyle(fontSize: 24),),
         ),
         SizedBox(height: 5,),
         ListTile(
           leading: new CircleAvatar(
             child: Icon(Icons.phone, size: 24, ),
           ),
-          title: new Text(returnObject.phonenumber, style: TextStyle(fontSize: 24),),
+          title: new Text("联系方式：" + returnObject.phonenumber, style: TextStyle(fontSize: 24),),
         ),
         SizedBox(height: 20,),
         RaisedButton(
