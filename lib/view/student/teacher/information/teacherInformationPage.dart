@@ -61,59 +61,33 @@ class _TeacherInformationPageState extends State<TeacherInformationPage> {
   createSuccessPage(ReturnObject returnObject) {
 
     page = new ListView(
-      // crossAxisAlignment: CrossAxisAlignment.center,
-      // mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        // Image.network(userInformation.imageurl),
-        SizedBox(height: 100,),
-        Container(
-            width:172.0,
-            height:172.0,
-            decoration:BoxDecoration(
-                shape:BoxShape.circle,
-                image:DecorationImage(
-                  image: NetworkImage(returnObject.imageurl),
-                )
-            )
+        SizedBox(height: 10,),
+        ListTile(
+          leading: new CircleAvatar(
+            // child: Icon(Icons.account_circle, size: 24, ),
+            backgroundImage: NetworkImage(returnObject.imageurl),
+          ),
+          title: new Text(returnObject.name, style: TextStyle(fontSize: 24),),
         ),
         SizedBox(height: 5,),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: Text('姓名：', textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
-            ),
-            Expanded(
-              child: Text(returnObject.name, textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
-            ),
-          ],
+        ListTile(
+          leading: new CircleAvatar(
+            child: Icon(Icons.school, size: 24, ),
+          ),
+          title: new Text(returnObject.professionalid, style: TextStyle(fontSize: 24),),
         ),
         SizedBox(height: 5,),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: Text('专业编号', textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
-            ),
-            Expanded(
-              child: Text(returnObject.professionalid, textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
-            ),
-          ],
-        ),
-        SizedBox(height: 5,),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: Text('电话号码', textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
-            ),
-            Expanded(
-              child: Text(returnObject.phonenumber, textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
-            ),
-          ],
+        ListTile(
+          leading: new CircleAvatar(
+            child: Icon(Icons.phone, size: 24, ),
+          ),
+          title: new Text(returnObject.phonenumber, style: TextStyle(fontSize: 24),),
         ),
         SizedBox(height: 20,),
         RaisedButton(
             color: Colors.blueAccent,
-            child: Text("我的题目"),
+            child: Text("查看题目"),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10) //设置圆角
             ),
@@ -125,13 +99,11 @@ class _TeacherInformationPageState extends State<TeacherInformationPage> {
               );
             }
         ),
-        SizedBox(height: 20,),
       ],
     );
     setState(() {
       page = page;
     });
-
   }
 
   createErrorPage() {
