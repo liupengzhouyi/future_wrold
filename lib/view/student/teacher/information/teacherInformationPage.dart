@@ -74,14 +74,14 @@ class _TeacherInformationPageState extends State<TeacherInformationPage> {
         SizedBox(height: 5,),
         ListTile(
           leading: new CircleAvatar(
-            child: Icon(Icons.assignment_ind, size: 24, ),
+            child: Icon(Icons.school, size: 24, ),
           ),
           title: new Text(returnObject.teachernumber, style: TextStyle(fontSize: 24),),
         ),
         SizedBox(height: 5,),
         ListTile(
           leading: new CircleAvatar(
-            child: Icon(Icons.school, size: 24, ),
+            child: Icon(Icons.account_balance, size: 24, ),
           ),
           title: new Text(returnObject.professionalid, style: TextStyle(fontSize: 24),),
         ),

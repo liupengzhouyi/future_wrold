@@ -23,9 +23,26 @@ class _PaperCardState extends State<PaperCard> {
 
   @override
   Widget build(BuildContext context) {
+    return createItem();
+  }
+
+  Widget createItem() {
+    Icon tempIcon;
+    Text tempText;
+    Icon tempUser;
+    if (returnObject.isselect == 1) {
+      tempIcon = Icon(Icons.book, size: 24, color: Colors.red,);
+      tempText = new Text('已申请');
+      tempUser = Icon(Icons.person, size: 24, color: Colors.black,);
+    } else {
+      tempIcon = Icon(Icons.bookmark, size: 24, color: Colors.green, );
+      tempText = new Text('未申请');
+      tempUser = Icon(Icons.perm_identity, size: 24, color: Colors.green,);
+    }
+
     return Container(
       color: Colors.white,
-      height: 180,
+      height: 150,
       alignment: Alignment.center,
       child: new Padding(
         padding: new EdgeInsets.only(left: 5.0, top: 5.0),
@@ -34,31 +51,19 @@ class _PaperCardState extends State<PaperCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 new Container(
-                  padding: const EdgeInsets.all(32.0),
-                  child: new Row(
-                    children: [
-                      new Icon(
-                        Icons.star,
-                        color: Colors.red[500],
-                      ),
-                      new SizedBox(width: 10,),
-                      new Expanded(
-                        child: new Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            new Container(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: new Text(
-                                returnObject.title,
-                                style: new TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListTile(
+                    leading: new CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: tempIcon,
+                    ),
+                    title: new Text(returnObject.title, style: TextStyle(fontSize: 24),),
+                    subtitle: new Row(
+                      children: <Widget>[
+                        tempUser,
+                        tempText,
+                      ],
+                    ),
                   ),
                 ),
                 new Container(
@@ -66,7 +71,7 @@ class _PaperCardState extends State<PaperCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       buildButtonColumn(Icons.file_download, '下载'),
-                      buildButtonColumn(Icons.delete_forever, '删除'),
+                      buildButtonColumn(Icons.verified_user, '申请'),
                       buildButtonColumn(Icons.call_made, '申请信息'),
                     ],
                   ),
