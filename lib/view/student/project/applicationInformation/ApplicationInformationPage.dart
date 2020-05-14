@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/student/project/applicationInformation/Applicationinformation.dart';
 import 'package:futurewrold/model/student/project/applicationInformation/ReturnApplicationInformation.dart';
+import 'package:futurewrold/model/student/project/applicationInformation/ReturnObject.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/student/project/applicationInformation/ApplicationInformationList.dart';
 
 class ApplicationInformationPage extends StatefulWidget {
 
@@ -53,12 +55,23 @@ class _ApplicationInformationPageState extends State<ApplicationInformationPage>
     );
     ReturnApplicationInformation returnApplicationInformation = ReturnApplicationInformation.fromJson(result);
     if (returnApplicationInformation.returnKey == true) {
+      List<ReturnObject> list = returnApplicationInformation.returnObject;
+      if (list.length == 0) {
 
+      } else {
+        createListView(list);
+      }
     } else {
 
     }
   }
 
+  void createListView(List<ReturnObject> list) {
+    page = ApplicationInformationList(list);
+    setState(() {
+      page;
+    });
+  }
 
 
 }
