@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/student/myProject/information/GetMyPaperInformation.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
 
 class MyPaperPage extends StatefulWidget {
 
@@ -29,6 +31,7 @@ class _MyPaperPageState extends State<MyPaperPage> {
         size: 64,
       ),
     );
+    getData();
   }
 
   @override
@@ -44,7 +47,14 @@ class _MyPaperPageState extends State<MyPaperPage> {
     );
   }
 
-  void getData() {
+  Future<void> getData() async {
+    GetMyPaperInformation getMyPaperInformation = new GetMyPaperInformation();
+    getMyPaperInformation.studentid = userNumber;
+    var result = await HttpUtils.request(
+      '/OtherContrller/selectMyTitle',
+      method: HttpUtils.POST,
+      data: getMyPaperInformation.toJson(),
+    );
 
   }
 
