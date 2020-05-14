@@ -5,10 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/view/student/myProject/information/MyPaperPage.dart';
+import 'package:futurewrold/view/student/myProject/information/InformationPro.dart';
 import 'package:futurewrold/view/student/teacher/select/college/getTeacherAllByCollege.dart';
 import 'package:futurewrold/view/student/teacher/select/professional/getTeacherByProfessional.dart';
-import 'package:futurewrold/view/teacher/project/add/addProjectPage.dart';
-import 'package:futurewrold/view/teacher/project/myProject/SelectMyProject.dart';
 import 'package:path_provider/path_provider.dart';
 
 
@@ -115,7 +114,7 @@ class _MyPageState extends State<MyPage> {
           onPressed: () {
             Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => TeacherAddProjectPage(userInformation.userNumber),
+                  // builder: (context) => (),
                 )
             );
           },
