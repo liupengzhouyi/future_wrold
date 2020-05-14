@@ -38,4 +38,7 @@ class _ApplicationInformationPageState extends State<ApplicationInformationPage>
       ),
     );
   }
+
+
+
 }
