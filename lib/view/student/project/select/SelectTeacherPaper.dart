@@ -54,7 +54,7 @@ class _SelectTeacherPaperState extends State<SelectTeacherPaper> {
       method: HttpUtils.POST,
       data: selectTeacherPaperEntity.toJson(),
     );
-    print(result);
+    // print(result);
     ReturnSelectTeacherPaperEntity returnSelectTeacherPaperEntity = ReturnSelectTeacherPaperEntity.fromJson(result);
     if (returnSelectTeacherPaperEntity.returnKey == true) {
       if (returnSelectTeacherPaperEntity.returnObject.length == 0) {

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/student/project/applicationInformation/Applicationinformation.dart';
+import 'package:futurewrold/model/student/project/applicationInformation/ReturnApplicationInformation.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
 
 class ApplicationInformationPage extends StatefulWidget {
 
@@ -20,13 +23,16 @@ class _ApplicationInformationPageState extends State<ApplicationInformationPage>
 
   Widget page;
 
+  ApplicationInformation applicationInformation = new ApplicationInformation();
+
   _ApplicationInformationPageState(this.paperId, this.paperTitle);
 
 
   @override
   void initState() {
+    applicationInformation.titleid = int.parse(paperId);
     page = Center(child: Icon(Icons.add, color: Colors.blue, size: 64,),);
-
+    getDate();
   }
 
   @override
@@ -37,6 +43,20 @@ class _ApplicationInformationPageState extends State<ApplicationInformationPage>
         child: page,
       ),
     );
+  }
+
+  Future<void> getDate() async {
+    var result = await HttpUtils.request(
+      '/OtherContrller/selectApplicationTitleInformationByTitle',
+      method: HttpUtils.POST,
+      data: applicationInformation.toJson(),
+    );
+    ReturnApplicationInformation returnApplicationInformation = ReturnApplicationInformation.fromJson(result);
+    if (returnApplicationInformation.returnKey == true) {
+
+    } else {
+
+    }
   }
 
 
