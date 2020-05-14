@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:futurewrold/model/student/myProject/add/ApplicationPaper.dart';
-import 'package:futurewrold/model/student/myProject/add/ReturnApplicationPaper.dart';
+import 'package:futurewrold/model/student/project/application/ApplicationPaper.dart';
+import 'package:futurewrold/model/student/project/application/ReturnApplicationPaper.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
 import 'package:path_provider/path_provider.dart';

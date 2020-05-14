@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
+import 'package:futurewrold/view/student/myProject/information/MyPaperPage.dart';
 import 'package:futurewrold/view/student/teacher/select/college/getTeacherAllByCollege.dart';
 import 'package:futurewrold/view/student/teacher/select/professional/getTeacherByProfessional.dart';
 import 'package:futurewrold/view/teacher/project/add/addProjectPage.dart';
@@ -32,16 +33,6 @@ class _MyPageState extends State<MyPage> {
   Widget build(BuildContext context) {
     return Container(
       child: page,
-      /*child: Container(
-          width:72.0,
-          height:72.0,
-          decoration:BoxDecoration(
-              shape:BoxShape.circle,
-              image:DecorationImage(
-                image: NetworkImage('http://123.56.167.84:8080/File/downloadFile/userHeadImage.png'),
-              )
-          )
-      ),*/
     );
   }
 
@@ -109,7 +100,7 @@ class _MyPageState extends State<MyPage> {
             onPressed: () {
               Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => SelectMyProject(),
+                    builder: (context) => MyPaperPage(userInformation.userNumber),
                   )
               );
             }

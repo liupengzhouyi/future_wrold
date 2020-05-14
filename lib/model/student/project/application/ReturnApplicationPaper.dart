@@ -1,4 +1,4 @@
-import 'package:futurewrold/model/student/myProject/add/ReturnObject.dart';
+import 'package:futurewrold/model/student/project/application/ReturnObject.dart';
 
 class ReturnApplicationPaper {
   String what;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/student/project/select/ReturnObject.dart';
-import 'package:futurewrold/view/student/myProject/add/applicationPaperDialog.dart';
+import 'package:futurewrold/view/student/project/application/applicationPaperDialog.dart';
 import 'package:futurewrold/view/student/project/applicationInformation/ApplicationInformationPage.dart';
 
 class PaperCard extends StatefulWidget {
