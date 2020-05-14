@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/student/myProject/add/ApplicationPaper.dart';
+import 'package:futurewrold/model/student/myProject/add/ReturnApplicationPaper.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
 import 'package:path_provider/path_provider.dart';
@@ -75,6 +76,12 @@ class _ApplicationPaperDialogState extends State<ApplicationPaperDialog> {
       method: HttpUtils.POST,
       data: applicationPaper.toJson(),
     );
+    ReturnApplicationPaper returnApplicationPaper = ReturnApplicationPaper.fromJson(result);
+    if (returnApplicationPaper.returnKey == true) {
+      applicarionSuccess();
+    } else {
+      applicarionError(returnApplicationPaper.why);
+    }
   }
 
 
@@ -143,7 +150,7 @@ class _ApplicationPaperDialogState extends State<ApplicationPaperDialog> {
             child: new Text('确定'),
             onPressed: () {
               applicationPaperFunction();
-              Navigator.of(context).pop();
+              // Navigator.of(context).pop();
             },
           ),
         ],
@@ -151,6 +158,74 @@ class _ApplicationPaperDialogState extends State<ApplicationPaperDialog> {
       print("=====---- :" + userInformation.toString());
     } on FileSystemException {
     }
+    setState(() {
+      page;
+    });
+  }
+
+  applicarionSuccess() {
+    page = AlertDialog(
+      title: new Text('申请毕业设计'),
+      content: new SingleChildScrollView(
+        child: new ListBody(
+          children: <Widget>[
+            new Text('题目：' + paperTitle),
+            new Text('申请人姓名：' + tempUserInformation.userName),
+            new Text('申请人编号：' + tempUserInformation.userNumber),
+            new Center(child: new Text('申请成功', style: TextStyle(color: Colors.green, fontSize: 48),),),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          child: new Text('取消'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        new FlatButton(
+          child: new Text('确定'),
+          onPressed: () {
+            applicationPaperFunction();
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+    setState(() {
+      page;
+    });
+  }
+
+  applicarionError(String why) {
+    page = AlertDialog(
+      title: new Text('申请毕业设计'),
+      content: new SingleChildScrollView(
+        child: new ListBody(
+          children: <Widget>[
+            new Text('题目：' + paperTitle),
+            new Text('申请人姓名：' + tempUserInformation.userName),
+            new Text('申请人编号：' + tempUserInformation.userNumber),
+            new Center(child: new Text('申请失败：' + why, style: TextStyle(color: Colors.red, fontSize: 32),),),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          child: new Text('取消'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        new FlatButton(
+          child: new Text('确定'),
+          onPressed: () {
+            applicationPaperFunction();
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
     setState(() {
       page;
     });
