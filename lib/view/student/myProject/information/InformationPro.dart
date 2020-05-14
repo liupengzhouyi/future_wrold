@@ -71,8 +71,60 @@ class _InformationProState extends State<InformationPro> {
                     title: Text('我的信息'),
                   );
                 },
-                body: ListTile(
-                  title: Text('expansion no.'),
+                body: Padding(
+                  padding: EdgeInsets.fromLTRB(15, 0, 15, 15),
+                  child: ListBody(
+                    children: <Widget>[
+                      ListBody(
+                        children: <Widget>[
+                          ListTile(
+                            leading: new CircleAvatar(
+                              // child: Icon(Icons.account_circle, size: 24, ),
+                              backgroundImage: NetworkImage(student.imageurl),
+                            ),
+                            title: new Text(student.name, style: TextStyle(fontSize: 24),),
+                          ),
+
+                        ],
+                      ),
+                      SizedBox(height: 5,),
+                      ListBody(
+                        children: <Widget>[
+                          ListTile(
+                            leading: new CircleAvatar(
+                              child: Icon(Icons.school, size: 24, ),
+                            ),
+                            title: new Text("学生编号：" + teacher.teachernumber, style: TextStyle(fontSize: 24),),
+                          ),
+
+                        ],
+                      ),
+                      SizedBox(height: 5,),
+                      ListBody(
+                        children: <Widget>[
+                          ListTile(
+                            leading: new CircleAvatar(
+                              child: Icon(Icons.account_balance, size: 24, ),
+                            ),
+                            title: new Text("专业编号：" + student.prodessionalid.toString(), style: TextStyle(fontSize: 24),),
+                          ),
+
+                        ],
+                      ),
+                      SizedBox(height: 5,),
+                      ListBody(
+                        children: <Widget>[
+                          ListTile(
+                            leading: new CircleAvatar(
+                              child: Icon(Icons.phone, size: 24, ),
+                            ),
+                            title: new Text("联系方式：" + student.phonenumber, style: TextStyle(fontSize: 24),),
+                          ),
+
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 isExpanded: expandStateList[0].isOpen
             ),
@@ -82,8 +134,60 @@ class _InformationProState extends State<InformationPro> {
                     title: Text('导师信息'),
                   );
                 },
-                body: ListTile(
-                  title: Text('expansion no.'),
+                body: Padding(
+                  padding: EdgeInsets.fromLTRB(15, 0, 15, 15),
+                  child: ListBody(
+                    children: <Widget>[
+                      ListBody(
+                        children: <Widget>[
+                          ListTile(
+                            leading: new CircleAvatar(
+                              // child: Icon(Icons.account_circle, size: 24, ),
+                              backgroundImage: NetworkImage(teacher.imageurl),
+                            ),
+                            title: new Text(teacher.name, style: TextStyle(fontSize: 24),),
+                          ),
+
+                        ],
+                      ),
+                      SizedBox(height: 5,),
+                      ListBody(
+                        children: <Widget>[
+                          ListTile(
+                            leading: new CircleAvatar(
+                              child: Icon(Icons.school, size: 24, ),
+                            ),
+                            title: new Text("教师编号：" + teacher.teachernumber, style: TextStyle(fontSize: 24),),
+                          ),
+
+                        ],
+                      ),
+                      SizedBox(height: 5,),
+                      ListBody(
+                        children: <Widget>[
+                          ListTile(
+                            leading: new CircleAvatar(
+                              child: Icon(Icons.account_balance, size: 24, ),
+                            ),
+                            title: new Text("专业编号：" + teacher.professionalid, style: TextStyle(fontSize: 24),),
+                          ),
+
+                        ],
+                      ),
+                      SizedBox(height: 5,),
+                      ListBody(
+                        children: <Widget>[
+                          ListTile(
+                            leading: new CircleAvatar(
+                              child: Icon(Icons.phone, size: 24, ),
+                            ),
+                            title: new Text("联系方式：" + teacher.phonenumber, style: TextStyle(fontSize: 24),),
+                          ),
+
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 isExpanded: expandStateList[1].isOpen
             ),
@@ -93,8 +197,39 @@ class _InformationProState extends State<InformationPro> {
                     title: Text('选题信息'),
                   );
                 },
-                body: ListTile(
-                  title: Text('expansion no.'),
+                body: Padding(
+                  padding: EdgeInsets.fromLTRB(15, 0, 15, 15),
+                  child: ListBody(
+                    children: <Widget>[
+                      ListBody(
+                        children: <Widget>[
+                          ListTile(
+                            leading: new CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Icon(Icons.access_time, size: 24, color: Colors.blue,),
+                            ),
+                            title: new Text("申请时间", style: TextStyle(fontSize: 14),),
+                            subtitle: new Text(selectTitle.applicationdata, style: TextStyle(fontSize: 18),),
+                          ),
+
+                        ],
+                      ),
+                      SizedBox(height: 5,),
+                      ListBody(
+                        children: <Widget>[
+                          ListTile(
+                            leading: new CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Icon(Icons.access_time, size: 24, color: Colors.lightGreenAccent,),
+                            ),
+                            title: new Text("通过时间：", style: TextStyle(fontSize: 14),),
+                            subtitle: new Text(selectTitle.passdata, style: TextStyle(fontSize: 18),),
+                          ),
+
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 isExpanded: expandStateList[2].isOpen
             ),
@@ -104,8 +239,44 @@ class _InformationProState extends State<InformationPro> {
                     title: Text('题目信息'),
                   );
                 },
-                body: ListTile(
-                  title: Text('expansion no.'),
+                body: Padding(
+                  padding: EdgeInsets.fromLTRB(15, 0, 15, 15),
+                  child: ListBody(
+                    children: <Widget>[
+                      ListBody(
+                        children: <Widget>[
+                          ListTile(
+                            leading: new CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Icon(Icons.book, size: 24, color: Colors.red,),
+                            ),
+                            title: new Text(project.title, style: TextStyle(fontSize: 24),),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5,),
+                      ListBody(
+                        children: <Widget>[
+                          ListTile(
+                            leading: new CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Icon(Icons.screen_share, size: 24, color: Colors.deepPurpleAccent,),
+                            ),
+                            title: new Text("查看完成情况", style: TextStyle(fontSize: 24),),
+                            trailing: Icon(Icons.keyboard_arrow_right),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    // builder: (context) => ,
+                                  )
+                              );
+                            },
+                          ),
+
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 isExpanded: expandStateList[3].isOpen
             ),
