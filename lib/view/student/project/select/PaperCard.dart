@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/student/project/select/ReturnObject.dart';
+import 'package:futurewrold/view/student/myProject/add/applicationPaperDialog.dart';
 import 'package:futurewrold/view/student/project/applicationInformation/ApplicationInformationPage.dart';
 
 class PaperCard extends StatefulWidget {
@@ -95,6 +96,8 @@ class _PaperCardState extends State<PaperCard> {
           onPressed: () {
             if (index == 3) {
               selectApplicationInformation();
+            } else if (index == 2) {
+              applicationPaper();
             }
           },
           color: Colors.blueAccent,
@@ -120,6 +123,18 @@ class _PaperCardState extends State<PaperCard> {
           builder: (context) => ApplicationInformationPage(returnObject.id.toString(), returnObject.title),
         )
     );
+  }
+
+  applicationPaper() {
+    showDialog<Null>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return ApplicationPaperDialog(returnObject.id.toString(), returnObject.title);
+      },
+    ).then((val) {
+      print(val);
+    });
   }
 
 }
