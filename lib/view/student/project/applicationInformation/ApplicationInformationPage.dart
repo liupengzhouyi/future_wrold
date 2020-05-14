@@ -57,17 +57,26 @@ class _ApplicationInformationPageState extends State<ApplicationInformationPage>
     if (returnApplicationInformation.returnKey == true) {
       List<ReturnObject> list = returnApplicationInformation.returnObject;
       if (list.length == 0) {
-
+        errorPage();
       } else {
         createListView(list);
       }
     } else {
-
+      errorPage();
     }
   }
 
   void createListView(List<ReturnObject> list) {
     page = ApplicationInformationList(list);
+    setState(() {
+      page;
+    });
+  }
+
+  void errorPage() {
+    page = Center(
+        child: Icon(Icons.delete_forever, color: Colors.blue, size: 64,),
+    );
     setState(() {
       page;
     });
