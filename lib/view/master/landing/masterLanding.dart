@@ -30,6 +30,7 @@ class _MasterLoginPageState extends State<MasterLoginPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: new AppBar(
         title: new Text("管理员登录", style: new TextStyle(color: Colors.white)),
         iconTheme: new IconThemeData(color: Colors.white),

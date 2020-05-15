@@ -30,6 +30,7 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: new AppBar(
         title: new Text("学生登录", style: new TextStyle(color: Colors.white)),
         iconTheme: new IconThemeData(color: Colors.white),
