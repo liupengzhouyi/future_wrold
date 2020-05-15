@@ -5,8 +5,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/student/myProject/add/AddPaperFile.dart';
 import 'package:futurewrold/model/utils/file/image/ReturnUploadFile.dart';
 import 'package:futurewrold/model/utils/file/image/ReturnObject.dart';
+import 'package:futurewrold/view/student/myProject/add/controller/AddPaperFileController.dart';
 
 
 class AddNewpaperFilePage extends StatefulWidget {
@@ -152,8 +154,18 @@ class _AddNewpaperFilePageState extends State<AddNewpaperFilePage> {
   }
 
   addPaperFileFunction() {
+    AddPaperFile addPaperFile;
+    addPaperFile.name = name;
+    addPaperFile.introduction = introduction;
+    addPaperFile.studentnumber = studentNumber;
+    addPaperFile.fileurl = myfileUrl;
+    addPaperFile.titleid = int.parse(titleId);
+    AddPaperFileController addPaperFileController = new AddPaperFileController(addPaperFile);
+    if (addPaperFileController.key == true) {
 
+    } else {
 
+    }
   }
 
   Padding buildTitleLine() {
