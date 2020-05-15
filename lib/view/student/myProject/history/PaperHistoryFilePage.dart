@@ -41,11 +41,14 @@ class _PaperHistoryFilePageState extends State<PaperHistoryFilePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("我的毕设记录"),
+        title: Text(name + "历史记录"),
       ),
       body: page,
     );
   }
+
+
+  
 
   void createPaerFileHostoryListView() {
 
