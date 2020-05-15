@@ -3,6 +3,7 @@ import 'package:futurewrold/model/student/myProject/select/ReturnObject.dart';
 import 'package:futurewrold/model/student/myProject/select/ReturnSelectMyPaperFileEntity.dart';
 import 'package:futurewrold/model/student/myProject/select/SelectMyPaperFileEntity.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/student/myProject/select/PaperListView.dart';
 
 class SelectMyPaperFile extends StatefulWidget {
 
@@ -62,7 +63,7 @@ class _SelectMyPaperFileState extends State<SelectMyPaperFile> {
   }
 
   void createMyPaperFileList(List<ReturnObject> list) {
-
+    page = PaperListView(list);
     setState(() {
       page;
     });
