@@ -1,5 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/student/myProject/history/GetPaperHistoryFile.dart';
+import 'package:futurewrold/model/student/myProject/history/ReturnGetPaperHistoryFile.dart';
+import 'package:futurewrold/model/student/myProject/history/ReturnObject.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/student/myProject/history/PaperListView.dart';
 
 class PaperHistoryFilePage extends StatefulWidget {
 
@@ -33,7 +38,7 @@ class _PaperHistoryFilePageState extends State<PaperHistoryFilePage> {
         size: 64,
       ),
     );
-    createPaerFileHostoryListView();
+    getData();
   }
 
   @override
@@ -48,11 +53,36 @@ class _PaperHistoryFilePageState extends State<PaperHistoryFilePage> {
   }
 
 
-  
+  Future<void> getData() async {
+    GetPaperHistoryFile getPaperHistoryFile = new GetPaperHistoryFile();
+    getPaperHistoryFile.titleid = int.parse(id);
+    getPaperHistoryFile.name = name;
+    var result = await HttpUtils.request(
+      '/projectfile/getAllByTitleIdAndNameFalse',
+      method: HttpUtils.POST,
+      data: getPaperHistoryFile.toJson(),
+    );
+    ReturnGetPaperHistoryFile returnGetPaperHistoryFile = ReturnGetPaperHistoryFile.fromJson(result);
+    if (returnGetPaperHistoryFile.returnKey == true) {
+      List<ReturnObject> list = returnGetPaperHistoryFile.returnObject;
+      if (list.length == 0) {
+        createErrorPage();
+      } else {
+        createPaerFileHostoryListView(list);
+      }
+    } else {
+      createErrorPage();
+    }
+  }
 
-  void createPaerFileHostoryListView() {
+  void createPaerFileHostoryListView(List<ReturnObject> list) {
+    page = PaperListView(list);
+    setState(() {
+      page;
+    });
+  }
 
-
+  void createErrorPage() {
     setState(() {
       page;
     });
