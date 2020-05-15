@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/student/myProject/select/ReturnObject.dart';
+import 'package:futurewrold/view/student/myProject/select/AddLink.dart';
 import 'package:futurewrold/view/student/myProject/select/PaperFileCard.dart';
 
 class PaperListView extends StatefulWidget {
@@ -42,6 +43,8 @@ class _PaperListViewState extends State<PaperListView> {
   }
   void createPaperListView() {
     List<Widget> widgetList = new List();
+    ReturnObject t = list[0];
+    widgetList.add(new AddLink(t.titleid.toString()));
     for (ReturnObject item in list) {
       PaperFileCard temp = PaperFileCard(item);
       widgetList.add(temp);
