@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/student/myProject/select/SelectMyPaperFileEntity.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
 
 class SelectMyPaperFile extends StatefulWidget {
 
   String titleid;
-
 
   SelectMyPaperFile(this.titleid);
 
@@ -13,6 +14,7 @@ class SelectMyPaperFile extends StatefulWidget {
 
 class _SelectMyPaperFileState extends State<SelectMyPaperFile> {
 
+  _SelectMyPaperFileState(this.titleid);
 
   String titleid;
 
@@ -35,7 +37,19 @@ class _SelectMyPaperFileState extends State<SelectMyPaperFile> {
     );
   }
 
-  _SelectMyPaperFileState(this.titleid);
+
+  Future<void> getData() async {
+    SelectMyPaperFileEntity selectMyPaperFileEntity = new SelectMyPaperFileEntity();
+    selectMyPaperFileEntity.titleid = int.parse(titleid);
+    var result = await HttpUtils.request(
+      '/projectfile/getAllByTiitleIdTrue',
+      method: HttpUtils.POST,
+      data: selectMyPaperFileEntity.toJson(),
+    );
+
+  }
+
+
 }
 
 
