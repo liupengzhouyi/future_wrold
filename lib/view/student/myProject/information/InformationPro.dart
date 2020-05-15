@@ -3,6 +3,7 @@ import 'package:futurewrold/model/student/myProject/information/Project.dart';
 import 'package:futurewrold/model/student/myProject/information/Selecttitle.dart';
 import 'package:futurewrold/model/student/myProject/information/Student.dart';
 import 'package:futurewrold/model/student/myProject/information/Teacher.dart';
+import 'package:futurewrold/view/student/myProject/select/SelectMyPaperFile.dart';
 
 class InformationPro extends StatefulWidget {
 
@@ -267,7 +268,7 @@ class _InformationProState extends State<InformationPro> {
                             onTap: () {
                               Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    // builder: (context) => ,
+                                    builder: (context) => SelectMyPaperFile(project.id.toString()),
                                   )
                               );
                             },
