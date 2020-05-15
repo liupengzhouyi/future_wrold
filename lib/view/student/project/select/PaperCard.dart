@@ -41,7 +41,6 @@ class _PaperCardState extends State<PaperCard> {
       tempText = new Text('未申请');
       tempUser = Icon(Icons.perm_identity, size: 24, color: Colors.green,);
     }
-
     return Container(
       color: Colors.white,
       height: 180,
