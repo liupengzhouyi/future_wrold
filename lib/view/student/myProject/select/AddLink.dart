@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
+import 'package:futurewrold/view/student/myProject/add/AddNewpaperFilePage.dart';
 import 'package:path_provider/path_provider.dart';
 
 class AddLink extends StatefulWidget {
@@ -23,6 +24,12 @@ class _AddLinkState extends State<AddLink> {
 
   UserInformation tempUserInformation;
 
+
+  @override
+  void initState() {
+    readCounter();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +41,11 @@ class _AddLinkState extends State<AddLink> {
         child: RaisedButton(
           child: const Text('添加新环节', style: TextStyle(fontSize: 20)),
           onPressed: () {
-
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (context) => AddNewpaperFilePage(id, tempUserInformation.userNumber)
+                )
+            );
           },
         ),
       ),
@@ -64,7 +75,7 @@ class _AddLinkState extends State<AddLink> {
     }
   }
 
-  void _readCounter() async {
+  void readCounter() async {
     try {
       /*
        * 获取本地文件目录
