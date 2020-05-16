@@ -1,10 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:futurewrold/model/teacher/project/file/select/ReturnObject.dart';
-import 'package:futurewrold/view/teacher/project/file/edit/EditPaperFilePage.dart';
-import 'package:futurewrold/view/teacher/project/file/history/PaperHistoryFilePage.dart';
-
+import 'package:futurewrold/model/teacher/project/file/history/ReturnObject.dart';
 
 class PaperFileCard extends StatefulWidget {
 
@@ -26,7 +23,6 @@ class _PaperFileCardState extends State<PaperFileCard> {
 
   Widget page;
 
-
   @override
   void initState() {
     createCard();
@@ -44,7 +40,6 @@ class _PaperFileCardState extends State<PaperFileCard> {
     Text tempText;
     Icon tempUser;
     Text tempInformation;
-    Color approvalColor;
     if (returnObject.introduction.length > 16) {
       returnObject.introduction = returnObject.introduction.substring(0, 16) + '...';
     }
@@ -52,12 +47,6 @@ class _PaperFileCardState extends State<PaperFileCard> {
     tempIcon = Icon(Icons.check_circle_outline, size: 24, color: Colors.red,);
     tempText = new Text('版本：' + returnObject.version);
     tempUser = Icon(Icons.youtube_searched_for, size: 24, color: Colors.black,);
-    // print('returnObject.approval.toString().length:' + returnObject.approval.toString().length.toString());
-    if(returnObject.approval.toString().length == 0 || returnObject.approval.toString().length == 4) {
-      approvalColor = Colors.green;
-    } else {
-      approvalColor = Colors.red;
-    }
     page = Container(
       color: Colors.white,
       height: 160,
@@ -95,9 +84,8 @@ class _PaperFileCardState extends State<PaperFileCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       buildButtonColumn(Icons.file_download, '下载', 1, Colors.black),
-                      buildButtonColumn(Icons.access_time, '历史记录', 2, Colors.lightGreenAccent),
-                      buildButtonColumn(Icons.chat, '指导记录', 3, approvalColor),
-                      buildButtonColumn(Icons.list, '详情', 4, Colors.red),
+                      buildButtonColumn(Icons.chat, '指导记录', 2, Colors.red),
+                      buildButtonColumn(Icons.list, '详情', 3, Colors.lightBlueAccent),
                     ],
                   ),
                 ),
@@ -119,22 +107,23 @@ class _PaperFileCardState extends State<PaperFileCard> {
         new IconButton(
           icon: new Icon(icon, color: color),
           onPressed: () {
-            if (index == 2) {
+            if (index == 1) {
               Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (context) => PaperHistoryFilePage(returnObject.titleid.toString(), returnObject.name)
+                    // builder: (context) => PaperHistoryFilePage(returnObject.titleid.toString(), returnObject.name)
                   )
               );
             }
-            if (index == 3) {
+            if(index == 2) {
               Text teacherApproval = new Text('导师未批改');
               Text ApprovalDate;
+              // print('returnObject.approval.toString().length:' + returnObject.approval.toString().length.toString());
               if (returnObject.approval.toString().length.toString() == '0') {
                 teacherApproval = new Text('导师未批改');
                 ApprovalDate = new Text('');
               } else {
-                teacherApproval = new Text(returnObject.approval);
-                ApprovalDate = new Text(returnObject.approvaldata);
+                teacherApproval = new Text(returnObject.approval.toString());
+                ApprovalDate = new Text(returnObject.approvaldata.toString());
               }
               returnObject.approval.toString();
               showDialog<Null>(
@@ -159,16 +148,6 @@ class _PaperFileCardState extends State<PaperFileCard> {
                           Navigator.of(context).pop();
                         },
                       ),
-                      new FlatButton(
-                        child: new Text('指导意见'),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => EditPaperFilePage(returnObject.id.toString(), returnObject.name)
-                              )
-                          );
-                        },
-                      ),
                     ],
                   );
                 },
@@ -176,7 +155,7 @@ class _PaperFileCardState extends State<PaperFileCard> {
                 print(val);
               });
             }
-            if (index == 4) {
+            if (index == 3) {
               Text teacherApproval = new Text('无详情');
               if (returnObject.introduction.toString().length.toString() == '0') {
                 teacherApproval = new Text('无详情');
