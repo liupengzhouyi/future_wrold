@@ -22,13 +22,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// {"id":20,
-// "teacherid":67159002,
-// "title":"手电筒发光原理",
-// "fileurl":"http://127.0.0.1:8080/File/downloadFile/00用例图.pdf",
-// "isselect":0,
-// "studentnumber":""}
-
 class ProjectCard extends StatefulWidget {
 
   ReturnObject returnObject;
@@ -47,6 +40,17 @@ class _ProjectCardState extends State<ProjectCard> {
 
   @override
   Widget build(BuildContext context) {
+    Icon tempIcon;
+    Text tempTitle;
+    Text tempText;
+    tempTitle = new Text(returnObject.title, style: TextStyle(fontSize: 24),);
+    if(returnObject.isselect == 1) {
+      tempIcon = Icon(Icons.check_circle, color: Colors.green, size: 32,);
+      tempText = Text('已申请');
+    } else {
+      tempIcon = Icon(Icons.block, color: Colors.yellow, size: 32,);
+      tempText = Text('未申请');
+    }
     return Container(
         color: Colors.white,
         height: 180,
@@ -58,31 +62,14 @@ class _ProjectCardState extends State<ProjectCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   new Container(
-                    padding: const EdgeInsets.all(32.0),
-                    child: new Row(
-                      children: [
-                        new Icon(
-                          Icons.star,
-                          color: Colors.red[500],
-                        ),
-                        new SizedBox(width: 10,),
-                        new Expanded(
-                          child: new Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              new Container(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: new Text(
-                                  returnObject.title,
-                                  style: new TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                    padding: const EdgeInsets.all(12.0),
+                    child: new ListTile(
+                      leading: new CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: tempIcon,
+                      ),
+                      title: tempTitle,
+                      subtitle: tempText,
                     ),
                   ),
                   new Container(
