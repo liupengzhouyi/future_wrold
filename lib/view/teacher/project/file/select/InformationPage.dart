@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:futurewrold/model/teacher/project/select/information/ReturnTeacherGetPaperFile.dart';
-import 'package:futurewrold/model/teacher/project/select/information/ReturnObject.dart';
-import 'package:futurewrold/model/teacher/project/select/information/TeacherGetPaperFile.dart';
+import 'package:futurewrold/model/teacher/project/file/select/ReturnObject.dart';
+import 'package:futurewrold/model/teacher/project/file/select/ReturnTeacherGetPaperFile.dart';
+import 'package:futurewrold/model/teacher/project/file/select/TeacherGetPaperFile.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/teacher/project/file/select/PaperFileListView.dart';
 
 class InformationPage extends StatefulWidget {
 
@@ -63,10 +64,8 @@ class _InformationPageState extends State<InformationPage> {
     }
   }
 
-
   void createSuccessPage(List<ReturnObject> list) {
-
-
+    page = PaperFileListView(list);
     setState(() {
       page;
     });

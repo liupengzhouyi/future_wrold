@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/teacher/project/select/applicationInformation/Selecttitle.dart';
 import 'package:futurewrold/model/teacher/project/select/applicationInformation/Student.dart';
-import 'package:futurewrold/view/teacher/project/application/passApplication/ApplicationDialog.dart';
+import 'package:futurewrold/view/teacher/project/application/passDialog/ApplicationDialog.dart';
 
 
 class PassApplicaationPage extends StatefulWidget {

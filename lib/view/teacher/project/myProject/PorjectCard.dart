@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/teacher/project/getMyPorject/ReturnObject.dart';
 import 'package:futurewrold/view/teacher/project/select/applicationInformation/ApplicationInformation.dart';
-import 'package:futurewrold/view/teacher/project/select/information/InformationPage.dart';
+import 'package:futurewrold/view/teacher/project/file/select/InformationPage.dart';
 
 void main() => runApp(MyApp());
 
