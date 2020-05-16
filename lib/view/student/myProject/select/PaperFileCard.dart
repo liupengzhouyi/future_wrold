@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/student/myProject/select/ReturnObject.dart';
 import 'package:futurewrold/view/student/myProject/history/PaperHistoryFilePage.dart';
+import 'package:futurewrold/view/student/myProject/select/UpdateLink.dart';
 
 class PaperFileCard extends StatefulWidget {
 
@@ -88,7 +89,7 @@ class _PaperFileCardState extends State<PaperFileCard> {
                       buildButtonColumn(Icons.file_download, '下载', 1, Colors.black),
                       buildButtonColumn(Icons.access_time, '历史记录', 2, Colors.lightGreenAccent),
                       buildButtonColumn(Icons.chat, '指导记录', 3, Colors.red),
-                      buildButtonColumn(Icons.autorenew, '更新', 3, Colors.lightBlueAccent),
+                      UpdateLink(returnObject.id.toString(), returnObject.name, Icons.autorenew, '更新', 4, Colors.lightBlueAccent),
                     ],
                   ),
                 ),
@@ -116,7 +117,14 @@ class _PaperFileCardState extends State<PaperFileCard> {
                     builder: (context) => PaperHistoryFilePage(returnObject.titleid.toString(), returnObject.name)
                   )
               );
+            }
 
+            if (index == 4) {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => PaperHistoryFilePage(returnObject.titleid.toString(), returnObject.name)
+                  )
+              );
             }
           },
           color: Colors.blueAccent,
