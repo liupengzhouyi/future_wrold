@@ -17,11 +17,22 @@ class _ApplicationInformationCardState extends State<ApplicationInformationCard>
 
   ReturnObject returnObject;
 
-
   _ApplicationInformationCardState(this.returnObject);
+
+  Widget page;
+
+
+  @override
+  void initState() {
+
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container();
+  }
+
+  void createPage() {
+
   }
 }

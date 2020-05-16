@@ -56,7 +56,7 @@ class _ApplicationInformationState extends State<ApplicationInformation> {
     TeacherGetApplicationInformation teacherGetApplicationInformation = new TeacherGetApplicationInformation();
     teacherGetApplicationInformation.titleid = int.parse(titleId);
     var result = await HttpUtils.request(
-      '/selecttitle/getAllByTitle',
+      '/OtherContrller/selectApplicationTitleInformationByTitle',
       method: HttpUtils.POST,
       data: teacherGetApplicationInformation.toJson(),
     );
