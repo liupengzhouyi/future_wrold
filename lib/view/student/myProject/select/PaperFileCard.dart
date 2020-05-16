@@ -90,6 +90,7 @@ class _PaperFileCardState extends State<PaperFileCard> {
                       buildButtonColumn(Icons.access_time, '历史记录', 2, Colors.lightGreenAccent),
                       buildButtonColumn(Icons.chat, '指导记录', 3, Colors.red),
                       UpdateLink(returnObject.titleid.toString(), returnObject.name, Icons.autorenew, '更新', 4, Colors.lightBlueAccent),
+                      buildButtonColumn(Icons.list, '详情', 5, Colors.red),
                     ],
                   ),
                 ),
@@ -172,6 +173,42 @@ class _PaperFileCardState extends State<PaperFileCard> {
                       builder: (context) => PaperHistoryFilePage(returnObject.titleid.toString(), returnObject.name)
                   )
               );
+            }
+            if (index == 5) {
+              Text teacherApproval = new Text('无详情');
+              if (returnObject.introduction.toString().length.toString() == '0') {
+                teacherApproval = new Text('无详情');
+              } else {
+                teacherApproval = new Text(returnObject.introduction);
+              }
+              returnObject.approval.toString();
+              showDialog<Null>(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: new Text('详情'),
+                    content: new SingleChildScrollView(
+                      child: new ListBody(
+                        children: <Widget>[
+                          teacherApproval,
+                        ],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      new FlatButton(
+                        child: new Text('确定'),
+                        onPressed: () {
+                          // applicationPaperFunction();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ).then((val) {
+                print(val);
+              });
             }
           },
           color: Colors.blueAccent,
