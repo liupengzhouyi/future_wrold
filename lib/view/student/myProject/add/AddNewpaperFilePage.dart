@@ -6,8 +6,10 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/student/myProject/add/AddPaperFile.dart';
+import 'package:futurewrold/model/student/myProject/add/ReturnAddPaperFile.dart';
 import 'package:futurewrold/model/utils/file/image/ReturnUploadFile.dart';
 import 'package:futurewrold/model/utils/file/image/ReturnObject.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
 import 'package:futurewrold/view/student/myProject/add/controller/AddPaperFileController.dart';
 
 
@@ -33,9 +35,9 @@ class _AddNewpaperFilePageState extends State<AddNewpaperFilePage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  String name;
+  String name = "";
 
-  String introduction;
+  String introduction = "";
 
   String myfileUrl;
 
@@ -43,11 +45,10 @@ class _AddNewpaperFilePageState extends State<AddNewpaperFilePage> {
 
   String lpFileName = "未上传文件";
 
-  @override
+  Widget page;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  void init() {
+    page = Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("添加毕设记录"),
@@ -61,8 +62,8 @@ class _AddNewpaperFilePageState extends State<AddNewpaperFilePage> {
             buildTitle(),
             buildTitleLine(),
             SizedBox(height: 70.0),
-            buildTextFieldName('题目', '请输入设计题目'),
-            buildTextFieldInformation('描述', ''),
+            buildTextFieldName('题目', '请输入题目'),
+            buildTextFieldInformation('描述', '请输入描述'),
             SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -96,6 +97,12 @@ class _AddNewpaperFilePageState extends State<AddNewpaperFilePage> {
         ),
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    init();
+    return page;
   }
 
   Future _getFile() async {
@@ -140,11 +147,21 @@ class _AddNewpaperFilePageState extends State<AddNewpaperFilePage> {
           ),
           color: Colors.black,
           onPressed: () {
-            if (_formKey.currentState.validate()) {
-              ///只有输入的内容符合要求通过才会到达此处
-              _formKey.currentState.save();
-              //TODO 执行登录方法
-              addPaperFileFunction();
+            print('myfileUrl.length:' + myfileUrl.toString().length.toString());
+            if (myfileUrl.toString().length == 4) {
+              if (lpFileName.length < 20) {
+                lpFileName = lpFileName + '.';
+              }
+              setState(() {
+                lpFileName;
+              });
+            } else {
+              if (_formKey.currentState.validate()) {
+                ///只有输入的内容符合要求通过才会到达此处
+                _formKey.currentState.save();
+                //TODO 执行登录方法
+                addPaperFileFunction();
+              }
             }
           },
           shape: StadiumBorder(side: BorderSide()),
@@ -153,18 +170,76 @@ class _AddNewpaperFilePageState extends State<AddNewpaperFilePage> {
     );
   }
 
-  addPaperFileFunction() {
-    AddPaperFile addPaperFile;
+  addPaperFileFunction() async {
+    // print('name:' + name);
+    AddPaperFile addPaperFile = new AddPaperFile();
     addPaperFile.name = name;
     addPaperFile.introduction = introduction;
     addPaperFile.studentnumber = studentNumber;
     addPaperFile.fileurl = myfileUrl;
     addPaperFile.titleid = int.parse(titleId);
-    AddPaperFileController addPaperFileController = new AddPaperFileController(addPaperFile);
-    if (addPaperFileController.key == true) {
-
+    var result = await HttpUtils.request(
+      '/projectfile/add',
+      method: HttpUtils.POST,
+      data: addPaperFile.toJson(),
+    );
+    ReturnAddPaperFile returnAddPaperFile = ReturnAddPaperFile.fromJson(result);
+    if (returnAddPaperFile.returnKey == true) {
+      showDialog<Null>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text('添加毕业设计文件'),
+            content: new SingleChildScrollView(
+              child: new ListBody(
+                children: <Widget>[
+                  new Text('添加成功'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('确定'),
+                onPressed: () {
+                  // applicationPaperFunction();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      ).then((val) {
+        print(val);
+      });
     } else {
-
+      showDialog<Null>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text('添加毕业设计文件'),
+            content: new SingleChildScrollView(
+              child: new ListBody(
+                children: <Widget>[
+                  new Text('添加失败'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('确定'),
+                onPressed: () {
+                  // applicationPaperFunction();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      ).then((val) {
+        print(val);
+      });
     }
   }
 
@@ -202,7 +277,12 @@ class _AddNewpaperFilePageState extends State<AddNewpaperFilePage> {
           return myValidator;
         }
       },
-      onSaved: (String value) => name = value,
+      onSaved: (String value) {
+        name = value;
+        setState(() {
+          name;
+        });
+      }
     );
   }
 
@@ -215,8 +295,14 @@ class _AddNewpaperFilePageState extends State<AddNewpaperFilePage> {
         if (value.isEmpty) {
           return myValidator;
         }
+
       },
-      onSaved: (String value) => introduction = value,
+      onSaved: (String value) {
+        introduction= value;
+        setState(() {
+          introduction;
+        });
+      }
     );
   }
 }

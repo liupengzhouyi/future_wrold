@@ -51,7 +51,7 @@ class _PaperFileCardState extends State<PaperFileCard> {
     tempUser = Icon(Icons.youtube_searched_for, size: 24, color: Colors.black,);
     page = Container(
       color: Colors.white,
-      height: 150,
+      height: 160,
       alignment: Alignment.center,
       child: new Padding(
         padding: new EdgeInsets.only(left: 5.0, top: 5.0),
