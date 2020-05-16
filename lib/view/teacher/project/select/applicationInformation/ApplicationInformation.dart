@@ -28,7 +28,6 @@ class _ApplicationInformationState extends State<ApplicationInformation> {
 
   Widget page;
 
-
   @override
   void initState() {
     page = new Center(

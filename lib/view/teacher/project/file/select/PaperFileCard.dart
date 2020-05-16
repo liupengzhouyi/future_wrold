@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/teacher/project/file/select/ReturnObject.dart';
+import 'package:futurewrold/view/teacher/project/file/edit/EditPaperFilePage.dart';
 
 
 class PaperFileCard extends StatefulWidget {
@@ -95,7 +96,7 @@ class _PaperFileCardState extends State<PaperFileCard> {
                       buildButtonColumn(Icons.file_download, '下载', 1, Colors.black),
                       buildButtonColumn(Icons.access_time, '历史记录', 2, Colors.lightGreenAccent),
                       buildButtonColumn(Icons.chat, '指导记录', 3, approvalColor),
-                      buildButtonColumn(Icons.list, '详情', 5, Colors.red),
+                      buildButtonColumn(Icons.list, '详情', 4, Colors.red),
                     ],
                   ),
                 ),
@@ -160,8 +161,11 @@ class _PaperFileCardState extends State<PaperFileCard> {
                       new FlatButton(
                         child: new Text('指导意见'),
                         onPressed: () {
-                          Navigator.of(context).pop();
-
+                          Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => EditPaperFilePage(returnObject.id.toString())
+                              )
+                          );
                         },
                       ),
                     ],
@@ -172,13 +176,6 @@ class _PaperFileCardState extends State<PaperFileCard> {
               });
             }
             if (index == 4) {
-              Navigator.of(context).push(
-                  MaterialPageRoute(
-                      // builder: (context) => PaperHistoryFilePage(returnObject.titleid.toString(), returnObject.name)
-                  )
-              );
-            }
-            if (index == 5) {
               Text teacherApproval = new Text('无详情');
               if (returnObject.introduction.toString().length.toString() == '0') {
                 teacherApproval = new Text('无详情');
