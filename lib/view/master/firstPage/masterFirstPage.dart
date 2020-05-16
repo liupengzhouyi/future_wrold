@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/view/master/systemAd/add/AddSystemADPage.dart';
 import 'package:futurewrold/view/system/getAllSystemAD.dart';
 
 
@@ -60,7 +61,7 @@ class MasterFirstPageState extends State<MasterFirstPage> {
     BottomNavigationBarItem(
       backgroundColor: Colors.blue[600],
       icon: Icon(Icons.format_indent_increase),
-      title: Text("发现"),
+      title: Text("发布"),
     ),
     BottomNavigationBarItem(
       backgroundColor: Colors.blue[800],
@@ -77,7 +78,7 @@ class MasterFirstPageState extends State<MasterFirstPage> {
   //点击导航项是要显示的页面
   final pages = [
     ChildItemView("首页"),
-    ChildItemView("发现"),
+    AddSystemADPage(),
     GetAllSystemAD(),
     ChildItemView("我的")
   ];

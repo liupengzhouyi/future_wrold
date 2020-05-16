@@ -51,8 +51,8 @@ class _GetAllSystemADState extends State<GetAllSystemAD> {
     if (list.length == 0) {
       print('没有数据');
     } else {
-      for(ReturnObject item in list) {
-        listWidget.add(MyTimeLine(item));
+      for (int i = list.length-1; i>=0; i--) {
+        listWidget.add(MyTimeLine(list[i]));
       }
       page = Scaffold(
         body: new ListView(

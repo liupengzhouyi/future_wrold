@@ -27,6 +27,9 @@ class _TimeLineState extends State<MyTimeLine>{
     if (returnObject.lpcontent.length > maxLength) {
       returnObject.lpcontent = returnObject.lpcontent.substring(0, maxLength);
     }
+    if (returnObject.title.toString().length > 11) {
+      returnObject.title = returnObject.title.substring(0, 11) + '...';
+    }
     String content = returnObject.lpcontent + "...";
     data = returnObject.lpyear.toString() + "-" + returnObject.lpmonth.toString() + "-" + returnObject.lpday.toString();
     return new Padding(
