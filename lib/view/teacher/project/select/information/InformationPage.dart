@@ -35,4 +35,9 @@ class _InformationPageState extends State<InformationPage> {
       ),
     );
   }
+
+
+  void getData() {
+
+  }
 }
