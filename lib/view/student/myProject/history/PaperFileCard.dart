@@ -86,7 +86,7 @@ class _PaperFileCardState extends State<PaperFileCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       buildButtonColumn(Icons.file_download, '下载', 1, Colors.black),
-                      buildButtonColumn(Icons.chat, '指导记录', 3, Colors.red),
+                      buildButtonColumn(Icons.chat, '指导记录', 2, Colors.red),
                       buildButtonColumn(Icons.list, '详情', 3, Colors.lightBlueAccent),
                     ],
                   ),
@@ -109,14 +109,62 @@ class _PaperFileCardState extends State<PaperFileCard> {
         new IconButton(
           icon: new Icon(icon, color: color),
           onPressed: () {
-            if (index == 2) {
+            if (index == 1) {
               Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => PaperHistoryFilePage(returnObject.titleid.toString(), returnObject.name)
+                    // builder: (context) => PaperHistoryFilePage(returnObject.titleid.toString(), returnObject.name)
                   )
               );
-
             }
+            if(index == 2) {
+              Text teacherApproval = new Text('导师未批改');
+              Text ApprovalDate;
+              print('returnObject.approval.toString().length:' + returnObject.approval.toString().length.toString());
+              if (returnObject.approval.toString().length.toString() == '0') {
+                print('123456789====456789');
+                teacherApproval = new Text('导师未批改');
+                ApprovalDate = new Text('');
+              } else {
+                print('123456789=456789');
+                teacherApproval = new Text(
+                    returnObject.approval
+                );
+                ApprovalDate = new Text(
+                    returnObject.approvaldata
+                );
+              }
+
+              returnObject.approval.toString();
+              showDialog<Null>(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: new Text('导师意见'),
+                    content: new SingleChildScrollView(
+                      child: new ListBody(
+                        children: <Widget>[
+                          teacherApproval,
+                          ApprovalDate,
+                        ],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      new FlatButton(
+                        child: new Text('确定'),
+                        onPressed: () {
+                          // applicationPaperFunction();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ).then((val) {
+                print(val);
+              });
+            }
+
           },
           color: Colors.blueAccent,
           highlightColor: Colors.red,
