@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/teacher/project/select/applicationInformation/ReturnObject.dart';
+import 'package:futurewrold/model/teacher/project/select/applicationInformation/ReturnTeacherGetApplicationInformation.dart';
 import 'package:futurewrold/model/teacher/project/select/applicationInformation/TeacherGetApplicationInformation.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
 
@@ -56,8 +59,38 @@ class _ApplicationInformationState extends State<ApplicationInformation> {
       method: HttpUtils.POST,
       data: teacherGetApplicationInformation.toJson(),
     );
-
-
-
+    ReturnTeacherGetApplicationInformation returnTeacherGetApplicationInformation = ReturnTeacherGetApplicationInformation.fromJson(result);
+    if (returnTeacherGetApplicationInformation.returnKey == true) {
+      List<ReturnObject> list = returnTeacherGetApplicationInformation.returnObject;
+      if (list.length == 0) {
+        createErrorPage();
+      } else {
+        createSuccessPage(list);
+      }
+    } else {
+      createErrorPage();
+    }
   }
+
+
+  void createSuccessPage(List<ReturnObject> list) {
+
+    setState(() {
+      page;
+    });
+  }
+
+  void createErrorPage() {
+    page = new Center(
+      child: new Icon(
+        Icons.delete_forever,
+        color: Colors.lightBlueAccent,
+        size: 64,
+      ),
+    );
+    setState(() {
+      page;
+    });
+  }
+
 }
