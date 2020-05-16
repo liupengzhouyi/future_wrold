@@ -4,6 +4,7 @@ import 'package:futurewrold/model/teacher/project/select/applicationInformation/
 import 'package:futurewrold/model/teacher/project/select/applicationInformation/ReturnTeacherGetApplicationInformation.dart';
 import 'package:futurewrold/model/teacher/project/select/applicationInformation/TeacherGetApplicationInformation.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/teacher/project/select/applicationInformation/ApplicationInformationListView.dart';
 
 class ApplicationInformation extends StatefulWidget {
 
@@ -73,7 +74,7 @@ class _ApplicationInformationState extends State<ApplicationInformation> {
   }
 
   void createSuccessPage(List<ReturnObject> list) {
-
+    page = ApplicationInformationListView(list);
     setState(() {
       page;
     });
