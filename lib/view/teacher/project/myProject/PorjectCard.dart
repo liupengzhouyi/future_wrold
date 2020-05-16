@@ -76,9 +76,30 @@ class _ProjectCardState extends State<ProjectCard> {
                     child: new Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        buildButtonColumn(Icons.file_download, '下载'),
-                        buildButtonColumn(Icons.delete_forever, '删除'),
-                        buildButtonColumn(Icons.call_made, '申请信息'),
+                        buildButtonColumn(
+                            Icons.file_download,
+                            '下载',
+                            1,
+                            Colors.black,
+                        ),
+                        buildButtonColumn(
+                            Icons.delete_forever,
+                            '删除',
+                            2,
+                            Colors.red,
+                        ),
+                        buildButtonColumn(
+                          Icons.chat,
+                          '申请信息',
+                          3,
+                          Colors.blue,
+                        ),
+                        buildButtonColumn(
+                          Icons.assignment_ind,
+                          '完成情况',
+                          4,
+                          Colors.orange,
+                        ),
                       ],
                     ),
                   ),
@@ -89,23 +110,29 @@ class _ProjectCardState extends State<ProjectCard> {
     );
   }
 
-  Column buildButtonColumn(IconData icon, String label) {
-    Color color = Colors.blue;
+  Column buildButtonColumn(IconData icon, String label, int index, Color color) {
     return new Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        new Icon(icon, color: color),
-        new Container(
-          margin: const EdgeInsets.only(top: 8.0),
-          child: new Text(
-            label,
-            style: new TextStyle(
-              fontSize: 12.0,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
-          ),
+        new IconButton(
+          icon: new Icon(icon, color: color),
+          onPressed: () {
+            if (index == 1) {
+
+            }
+            if (index == 2) {
+
+            }
+            if (index == 3) {
+
+            }
+            if (index == 4) {
+
+            }
+          },
+          color: Colors.blueAccent,
+          highlightColor: Colors.red,
         ),
       ],
     );
