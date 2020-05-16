@@ -109,9 +109,7 @@ class _EditPaperFilePageState extends State<EditPaperFilePage> {
       method: HttpUtils.POST,
       data: teacherEditPaperFile.toJson(),
     );
+
   }
-
-
-
 
 }
