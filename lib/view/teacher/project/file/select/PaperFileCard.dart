@@ -163,7 +163,7 @@ class _PaperFileCardState extends State<PaperFileCard> {
                         onPressed: () {
                           Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => EditPaperFilePage(returnObject.id.toString())
+                                builder: (context) => EditPaperFilePage(returnObject.id.toString(), returnObject.name)
                               )
                           );
                         },
