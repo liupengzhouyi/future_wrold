@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/teacher/project/getMyPorject/ReturnObject.dart';
+import 'package:futurewrold/view/teacher/project/select/applicationInformation/ApplicationInformation.dart';
 
 void main() => runApp(MyApp());
 
@@ -128,7 +129,11 @@ class _ProjectCardState extends State<ProjectCard> {
 
             }
             if (index == 4) {
-
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => ApplicationInformation(returnObject.id.toString())
+                  )
+              );
             }
           },
           color: Colors.blueAccent,
