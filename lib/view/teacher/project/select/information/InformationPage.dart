@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/teacher/project/select/information/TeacherGetPaperFile.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
 
 class InformationPage extends StatefulWidget {
 
@@ -22,6 +24,7 @@ class _InformationPageState extends State<InformationPage> {
   @override
   void initState() {
     page = new Center(child: new Icon(Icons.rss_feed, size: 123, color: Colors.lightGreenAccent,));
+    getData();
   }
 
   @override
@@ -37,7 +40,15 @@ class _InformationPageState extends State<InformationPage> {
   }
 
 
-  void getData() {
+  Future<void> getData() async {
+    TeacherGetPaperFile teacherGetPaperFile = new TeacherGetPaperFile();
+    teacherGetPaperFile.titleid = int.parse(titleId);
+    var result = await HttpUtils.request(
+      '/projectfile/getAllByTiitleIdTrue',
+      method: HttpUtils.POST,
+      data: teacherGetPaperFile.toJson(),
+    );
+
 
   }
 }
