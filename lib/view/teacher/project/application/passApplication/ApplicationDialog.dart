@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/teacher/project/select/application/PassStudentApplication.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
 
 class ApplicationDialog extends StatefulWidget {
 
@@ -52,4 +54,18 @@ class _ApplicationDialogState extends State<ApplicationDialog> {
       child: page,
     );
   }
+
+
+  Future<void> passApplication() async {
+    PassStudentApplication passStudentApplication = new PassStudentApplication();
+    passStudentApplication.id = int.parse(id);
+    var result = await HttpUtils.request(
+      '/selecttitle/pass',
+      method: HttpUtils.POST,
+      data: passStudentApplication.toJson(),
+    );
+
+
+  }
+
 }
