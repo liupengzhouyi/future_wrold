@@ -42,6 +42,7 @@ class _PaperFileCardState extends State<PaperFileCard> {
     Text tempText;
     Icon tempUser;
     Text tempInformation;
+    Color approvalColor;
     if (returnObject.introduction.length > 16) {
       returnObject.introduction = returnObject.introduction.substring(0, 16) + '...';
     }
@@ -49,6 +50,12 @@ class _PaperFileCardState extends State<PaperFileCard> {
     tempIcon = Icon(Icons.check_circle_outline, size: 24, color: Colors.red,);
     tempText = new Text('版本：' + returnObject.version);
     tempUser = Icon(Icons.youtube_searched_for, size: 24, color: Colors.black,);
+    // print('returnObject.approval.toString().length:' + returnObject.approval.toString().length.toString());
+    if(returnObject.approval.toString().length == 0 || returnObject.approval.toString().length == 4) {
+      approvalColor = Colors.green;
+    } else {
+      approvalColor = Colors.red;
+    }
     page = Container(
       color: Colors.white,
       height: 160,
@@ -87,7 +94,7 @@ class _PaperFileCardState extends State<PaperFileCard> {
                     children: [
                       buildButtonColumn(Icons.file_download, '下载', 1, Colors.black),
                       buildButtonColumn(Icons.access_time, '历史记录', 2, Colors.lightGreenAccent),
-                      buildButtonColumn(Icons.chat, '指导记录', 3, Colors.red),
+                      buildButtonColumn(Icons.chat, '指导记录', 3, approvalColor),
                       buildButtonColumn(Icons.list, '详情', 5, Colors.red),
                     ],
                   ),
@@ -120,21 +127,13 @@ class _PaperFileCardState extends State<PaperFileCard> {
             if (index == 3) {
               Text teacherApproval = new Text('导师未批改');
               Text ApprovalDate;
-              print('returnObject.approval.toString().length:' + returnObject.approval.toString().length.toString());
               if (returnObject.approval.toString().length.toString() == '0') {
-                print('123456789====456789');
                 teacherApproval = new Text('导师未批改');
                 ApprovalDate = new Text('');
               } else {
-                print('123456789=456789');
-                teacherApproval = new Text(
-                    returnObject.approval
-                );
-                ApprovalDate = new Text(
-                    returnObject.approvaldata
-                );
+                teacherApproval = new Text(returnObject.approval);
+                ApprovalDate = new Text(returnObject.approvaldata);
               }
-
               returnObject.approval.toString();
               showDialog<Null>(
                 context: context,
@@ -156,6 +155,13 @@ class _PaperFileCardState extends State<PaperFileCard> {
                         onPressed: () {
                           // applicationPaperFunction();
                           Navigator.of(context).pop();
+                        },
+                      ),
+                      new FlatButton(
+                        child: new Text('指导意见'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+
                         },
                       ),
                     ],
