@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/teacher/project/file/edit/ReturnTeacherEditPaperFile.dart';
 import 'package:futurewrold/model/teacher/project/file/edit/TeacherEditPaperFile.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
 
@@ -109,7 +110,67 @@ class _EditPaperFilePageState extends State<EditPaperFilePage> {
       method: HttpUtils.POST,
       data: teacherEditPaperFile.toJson(),
     );
-
+    ReturnTeacherEditPaperFile returnTeacherEditPaperFile = ReturnTeacherEditPaperFile.fromJson(result);
+    if (returnTeacherEditPaperFile.returnKey == true) {
+      Text Approval = new Text('添加成功');
+      _controller.clear();
+      showDialog<Null>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text('导师添加指导记录'),
+            content: new SingleChildScrollView(
+              child: new ListBody(
+                children: <Widget>[
+                  Approval,
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('确定'),
+                onPressed: () {
+                  // applicationPaperFunction();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      ).then((val) {
+        print(val);
+      });
+    } else {
+      Text Approval = new Text('添加失败');
+      showDialog<Null>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text('导师添加指导记录'),
+            content: new SingleChildScrollView(
+              child: new ListBody(
+                children: <Widget>[
+                  Approval,
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('确定'),
+                onPressed: () {
+                  // applicationPaperFunction();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      ).then((val) {
+        print(val);
+      });
+    }
   }
 
 }
