@@ -118,7 +118,54 @@ class _PaperFileCardState extends State<PaperFileCard> {
                   )
               );
             }
+            if (index == 3) {
+              Text teacherApproval = new Text('导师未批改');
+              Text ApprovalDate;
+              print('returnObject.approval.toString().length:' + returnObject.approval.toString().length.toString());
+              if (returnObject.approval.toString().length.toString() == '0') {
+                print('123456789====456789');
+                teacherApproval = new Text('导师未批改');
+                ApprovalDate = new Text('');
+              } else {
+                print('123456789=456789');
+                teacherApproval = new Text(
+                    returnObject.approval
+                );
+                ApprovalDate = new Text(
+                    returnObject.approvaldata
+                );
+              }
 
+              returnObject.approval.toString();
+              showDialog<Null>(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: new Text('导师意见'),
+                    content: new SingleChildScrollView(
+                      child: new ListBody(
+                        children: <Widget>[
+                          teacherApproval,
+                          ApprovalDate,
+                        ],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      new FlatButton(
+                        child: new Text('确定'),
+                        onPressed: () {
+                          // applicationPaperFunction();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ).then((val) {
+                print(val);
+              });
+            }
             if (index == 4) {
               Navigator.of(context).push(
                   MaterialPageRoute(
