@@ -72,7 +72,6 @@ class _ApplicationInformationState extends State<ApplicationInformation> {
     }
   }
 
-
   void createSuccessPage(List<ReturnObject> list) {
 
     setState(() {
