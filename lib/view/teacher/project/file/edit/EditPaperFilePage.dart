@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/teacher/project/file/edit/TeacherEditPaperFile.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
 
 class EditPaperFilePage extends StatefulWidget {
 
@@ -58,7 +60,6 @@ class _EditPaperFilePageState extends State<EditPaperFilePage> {
         ),
       ],
     );
-
     setState(() {
       page;
     });
@@ -86,7 +87,7 @@ class _EditPaperFilePageState extends State<EditPaperFilePage> {
           icon: new Icon(icon, color: color, size: 64,),
           onPressed: () {
             if (index == 1) {
-              // applicationTitle();
+              editPaperFile();
             }
             if (index == 2) {
               _controller.clear();
@@ -99,6 +100,16 @@ class _EditPaperFilePageState extends State<EditPaperFilePage> {
     );
   }
 
+  Future<void> editPaperFile() async {
+    TeacherEditPaperFile teacherEditPaperFile = new TeacherEditPaperFile();
+    teacherEditPaperFile.id = int.parse(paperFileId);
+    teacherEditPaperFile.approval = _controller.text;
+    var result = await HttpUtils.request(
+      '/projectfile/approvalPaperFile',
+      method: HttpUtils.POST,
+      data: teacherEditPaperFile.toJson(),
+    );
+  }
 
 
 
