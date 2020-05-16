@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/teacher/project/select/applicationInformation/TeacherGetApplicationInformation.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
 
 class ApplicationInformation extends StatefulWidget {
 
@@ -32,6 +34,7 @@ class _ApplicationInformationState extends State<ApplicationInformation> {
         size: 64,
       ),
     );
+    getData();
   }
 
   @override
@@ -43,5 +46,18 @@ class _ApplicationInformationState extends State<ApplicationInformation> {
       ),
       body: page,
     );
+  }
+
+  Future<void> getData() async {
+    TeacherGetApplicationInformation teacherGetApplicationInformation = new TeacherGetApplicationInformation();
+    teacherGetApplicationInformation.titleid = int.parse(titleId);
+    var result = await HttpUtils.request(
+      '/selecttitle/getAllByTitle',
+      method: HttpUtils.POST,
+      data: teacherGetApplicationInformation.toJson(),
+    );
+
+
+
   }
 }
