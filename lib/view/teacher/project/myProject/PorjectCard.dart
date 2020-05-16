@@ -129,7 +129,7 @@ class _ProjectCardState extends State<ProjectCard> {
             if (index == 3) {
               Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (context) => InformationPage(returnObject.teacherid.toString())
+                      builder: (context) => InformationPage(returnObject.id.toString())
                   )
               );
             }
