@@ -35,7 +35,9 @@ class _ApplicationInformationListViewState extends State<ApplicationInformationL
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: page,
+    );
   }
 
   createList() {
