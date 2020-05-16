@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/teacher/project/select/application/PassStudentApplication.dart';
+import 'package:futurewrold/model/teacher/project/select/application/ReturnPassStudentApplication.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
 
 class ApplicationDialog extends StatefulWidget {
@@ -28,7 +29,7 @@ class _ApplicationDialogState extends State<ApplicationDialog> {
       title: new Text('批准毕业设计申请'),
       content: new SingleChildScrollView(
         child: new Center(
-          child: Icon(Icons.find_replace, color: Colors.lightGreenAccent, size: 64,),
+          child: Icon(Icons.call_split, color: Colors.lightGreenAccent, size: 128,),
         ),
       ),
       actions: <Widget>[
@@ -41,7 +42,7 @@ class _ApplicationDialogState extends State<ApplicationDialog> {
         new FlatButton(
           child: new Text('确定'),
           onPressed: () {
-            Navigator.of(context).pop();
+            passApplication();
           },
         ),
       ],
@@ -64,8 +65,58 @@ class _ApplicationDialogState extends State<ApplicationDialog> {
       method: HttpUtils.POST,
       data: passStudentApplication.toJson(),
     );
-
-
+    ReturnPassStudentApplication returnPassStudentApplication = ReturnPassStudentApplication.fromJson(result);
+    if (returnPassStudentApplication.returnKey == true) {
+      page = AlertDialog(
+        title: new Text('批准毕业设计申请'),
+        content: new SingleChildScrollView(
+          child: new Center(
+              child: Column(
+                children: <Widget>[
+                  Icon(Icons.check, color: Colors.green, size: 128,),
+                  Text('通过成功')
+                ],
+              )
+          ),
+        ),
+        actions: <Widget>[
+          new FlatButton(
+            child: new Text('确定'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+      setState(() {
+        page;
+      });
+    } else {
+      page = AlertDialog(
+        title: new Text('批准毕业设计申请'),
+        content: new SingleChildScrollView(
+          child: new Center(
+            child: Column(
+              children: <Widget>[
+                Icon(Icons.close, color: Colors.red, size: 128,),
+                Text('通过失败')
+              ],
+            )
+          ),
+        ),
+        actions: <Widget>[
+          new FlatButton(
+            child: new Text('确定'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+      setState(() {
+        page;
+      });
+    }
   }
 
 }
