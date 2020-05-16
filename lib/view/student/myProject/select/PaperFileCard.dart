@@ -89,7 +89,7 @@ class _PaperFileCardState extends State<PaperFileCard> {
                       buildButtonColumn(Icons.file_download, '下载', 1, Colors.black),
                       buildButtonColumn(Icons.access_time, '历史记录', 2, Colors.lightGreenAccent),
                       buildButtonColumn(Icons.chat, '指导记录', 3, Colors.red),
-                      UpdateLink(returnObject.id.toString(), returnObject.name, Icons.autorenew, '更新', 4, Colors.lightBlueAccent),
+                      UpdateLink(returnObject.titleid.toString(), returnObject.name, Icons.autorenew, '更新', 4, Colors.lightBlueAccent),
                     ],
                   ),
                 ),
