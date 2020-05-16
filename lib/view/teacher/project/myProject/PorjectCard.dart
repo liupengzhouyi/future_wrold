@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/teacher/project/getMyPorject/ReturnObject.dart';
 import 'package:futurewrold/view/teacher/project/select/applicationInformation/ApplicationInformation.dart';
+import 'package:futurewrold/view/teacher/project/select/information/InformationPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -91,13 +92,13 @@ class _ProjectCardState extends State<ProjectCard> {
                         ),
                         buildButtonColumn(
                           Icons.chat,
-                          '申请信息',
+                          '完成情况',
                           3,
                           Colors.blue,
                         ),
                         buildButtonColumn(
                           Icons.assignment_ind,
-                          '完成情况',
+                          '申请信息',
                           4,
                           Colors.orange,
                         ),
@@ -126,7 +127,11 @@ class _ProjectCardState extends State<ProjectCard> {
 
             }
             if (index == 3) {
-
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => InformationPage(returnObject.teacherid.toString())
+                  )
+              );
             }
             if (index == 4) {
               Navigator.of(context).push(
