@@ -7,6 +7,7 @@ import 'package:futurewrold/model/teacher/group/select/ReturnTeacherGetGroupInfo
 import 'package:futurewrold/model/teacher/group/select/TeacherGetGroupInformation.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
+import 'package:futurewrold/view/teacher/group/select/TeacherGroupList.dart';
 import 'package:path_provider/path_provider.dart';
 
 class SelectMyGroupPage extends StatefulWidget {
@@ -63,7 +64,7 @@ class _SelectMyGroupPageState extends State<SelectMyGroupPage> {
 
 
   void createSuccessPage(List<ReturnObject> list) {
-
+    page = TeacherGroupList(list);
     setState(() {
       page;
     });
