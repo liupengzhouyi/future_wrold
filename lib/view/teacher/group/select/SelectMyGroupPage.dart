@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/teacher/group/select/ReturnObject.dart';
+import 'package:futurewrold/model/teacher/group/select/ReturnTeacherGetGroupInformation.dart';
 import 'package:futurewrold/model/teacher/group/select/TeacherGetGroupInformation.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/utils/web/HttpUtils.dart';
@@ -45,12 +47,50 @@ class _SelectMyGroupPageState extends State<SelectMyGroupPage> {
       method: HttpUtils.POST,
       data: teacherGetGroupInformation.toJson(),
     );
+    ReturnTeacherGetGroupInformation returnTeacherGetGroupInformation = ReturnTeacherGetGroupInformation.fromJson(result);
+    if (returnTeacherGetGroupInformation.returnKey == true) {
+      List<ReturnObject> list = returnTeacherGetGroupInformation.returnObject;
+      if (list.length == 0) {
+        createErrorPage();
+      } else {
+        createSuccessPage(list);
+      }
+    } else {
+      createErrorPage();
+    }
 
-    
+  }
+
+
+  void createSuccessPage(List<ReturnObject> list) {
+
     setState(() {
       page;
     });
   }
+
+  void createErrorPage() {
+    page = new Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            new Icon(
+              Icons.delete_forever,
+              size: 128,
+              color: Colors.blue,
+            ),
+            new Text('没有数据'),
+          ],
+        )
+    );
+    setState(() {
+      page;
+    });
+  }
+
+
+
+
 
   Future<File> _getLocalFile() async {
     // 获取本地文档目录
@@ -90,7 +130,6 @@ class _SelectMyGroupPageState extends State<SelectMyGroupPage> {
       }
       // 从文件中读取变量作为字符串，一次全部读完存在内存里面
       var contents = await file.readAsString();
-
       var jsonMap = await json.decode(contents);
       UserInformation userInformation = UserInformation.fromJson(jsonMap);
       tempUserInformation = userInformation;
