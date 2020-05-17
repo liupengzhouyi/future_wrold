@@ -44,7 +44,9 @@ class _ChatListViewState extends State<ChatListView> {
     for (ReturnObject item in list) {
       ChatCard chatCard = new ChatCard(myNumber, item);
       chatList.add(chatCard);
+      chatList.add(SizedBox(height: 5,));
     }
+
     page = ListView(
       children: chatList,
     );
@@ -52,7 +54,6 @@ class _ChatListViewState extends State<ChatListView> {
       page;
     });
   }
-
 
 
 }

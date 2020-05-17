@@ -42,7 +42,6 @@ class _ChatListState extends State<ChatList> {
     );
   }
 
-
   Future<void> getData() async {
     TeacherGetChat teacherGetChat = new TeacherGetChat();
     teacherGetChat.groupid = int.parse(groupId);
@@ -61,6 +60,7 @@ class _ChatListState extends State<ChatList> {
 
 
   createListPage(List<ReturnObject> list) {
+
     page = ChatListView(myNumber, list);
     setState(() {
       page;

@@ -34,9 +34,69 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("评论"),
+        centerTitle: true,
+      ),
+      body: new Column(
+          children: <Widget>[
+            new Flexible(
+                child:page
+            ),
+            new Divider(height: 1.0),
+            new Container(
+              decoration: new BoxDecoration(
+                color: Theme.of(context).cardColor,),
+              child: _buildTextComposer(),
+            )
+          ]
+      ),
+    );
+    return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text(groupName),),
-      body: page,
+      body: Column(
+          children: <Widget>[
+            new Flexible(
+              child:page,
+            ),
+            new Divider(height: 1.0),
+            new Container(
+              decoration: new BoxDecoration(
+                color: Theme.of(context).cardColor,),
+              child: _buildTextComposer(),
+            )
+          ]
+      ),
+    );
+  }
+
+  final TextEditingController _textController = new TextEditingController();
+
+  void _handleSubmitted(String text) {
+    _textController.clear();
+  }
+
+  Widget _buildTextComposer() {
+    return new Container(
+        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: new Row(
+            children: <Widget> [
+              new Flexible(
+                  child: new TextField(
+                    controller: _textController,
+                    onSubmitted: _handleSubmitted,
+                    decoration: new InputDecoration.collapsed(hintText: '发送消息'),
+                  )
+              ),
+              new Container(
+                margin: new EdgeInsets.symmetric(horizontal: 4.0),
+                child: new IconButton(
+                    icon: new Icon(Icons.send),
+                    onPressed: () => _handleSubmitted(_textController.text)),
+              )
+            ]
+        )
     );
   }
 
