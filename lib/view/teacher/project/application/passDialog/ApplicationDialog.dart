@@ -18,7 +18,6 @@ class _ApplicationDialogState extends State<ApplicationDialog> {
 
   String id;
 
-
   _ApplicationDialogState(this.id);
 
   Widget page;

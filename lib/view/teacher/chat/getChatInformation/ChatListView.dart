@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:futurewrold/model/teacher/chat/getChatInformation/ReturnObject.dart';
 import 'package:futurewrold/view/teacher/chat/getChatInformation/ChatCard.dart';
@@ -39,6 +41,10 @@ class _ChatListViewState extends State<ChatListView> {
     );
   }
 
+  ScrollController _controller = ScrollController();
+
+
+
   void createListView() {
     List<Widget> chatList = new List();
     for (ReturnObject item in list) {
@@ -46,8 +52,11 @@ class _ChatListViewState extends State<ChatListView> {
       chatList.add(chatCard);
       chatList.add(SizedBox(height: 5,));
     }
-
+    if (list.length > 0)
+      Timer(Duration(milliseconds: 500),
+              () => _controller.jumpTo(_controller.position.maxScrollExtent));
     page = ListView(
+      controller: _controller,
       children: chatList,
     );
     setState(() {

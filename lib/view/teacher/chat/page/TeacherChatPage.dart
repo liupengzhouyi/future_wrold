@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/view/teacher/chat/chatting/Chatting.dart';
 import 'package:futurewrold/view/teacher/chat/getChatInformation/ChatList.dart';
 
 class TeacherChatPage extends StatefulWidget {
@@ -23,19 +24,21 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
 
   Widget page;
 
+  Widget allPage;
+
   @override
   void initState() {
     page = new Center(
       child: Icon(Icons.list, color: Colors.lightBlueAccent, size: 64,),
     );
     createChatPage();
+
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  createAll() {
+    allPage = Scaffold(
       appBar: AppBar(
-        title: Text("评论"),
+        title: Text(groupName),
         centerTitle: true,
       ),
       body: new Column(
@@ -52,29 +55,52 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
           ]
       ),
     );
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: Text(groupName),),
-      body: Column(
-          children: <Widget>[
-            new Flexible(
-              child:page,
-            ),
-            new Divider(height: 1.0),
-            new Container(
-              decoration: new BoxDecoration(
-                color: Theme.of(context).cardColor,),
-              child: _buildTextComposer(),
-            )
-          ]
-      ),
-    );
+    setState(() {
+      allPage;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    createAll();
+    return allPage;
   }
 
   final TextEditingController _textController = new TextEditingController();
 
-  void _handleSubmitted(String text) {
-    _textController.clear();
+  void _handleSubmitted() {
+    Chatting chatting = new Chatting(2.toString(), groupId, myNumber, _textController.text);
+    if (chatting.key == false) {
+      showDialog<Null>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text('发送信息'),
+            content: new SingleChildScrollView(
+              child: new ListBody(
+                children: <Widget>[
+                  new Text('发送失败'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('确定'),
+                onPressed: () {
+                  // applicationPaperFunction();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      ).then((val) {
+        print(val);
+      });
+    } else {
+      _textController.clear();
+    }
   }
 
   Widget _buildTextComposer() {
@@ -85,7 +111,7 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
               new Flexible(
                   child: new TextField(
                     controller: _textController,
-                    onSubmitted: _handleSubmitted,
+                    // onSubmitted: _handleSubmitted,
                     decoration: new InputDecoration.collapsed(hintText: '发送消息'),
                   )
               ),
@@ -93,7 +119,11 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
                 margin: new EdgeInsets.symmetric(horizontal: 4.0),
                 child: new IconButton(
                     icon: new Icon(Icons.send),
-                    onPressed: () => _handleSubmitted(_textController.text)),
+                    onPressed: () {
+                      _handleSubmitted();
+                      createAll();
+                    }
+                ),
               )
             ]
         )
