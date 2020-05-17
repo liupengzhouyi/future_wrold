@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/view/teacher/chat/getChatInformation/ChatList.dart';
 
 class TeacherChatPage extends StatefulWidget {
 
@@ -36,5 +37,9 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
       appBar: AppBar(title: Text(groupName),),
       body: page,
     );
+  }
+
+  void createChatPage() {
+    ChatList(groupId, myNumber);
   }
 }
