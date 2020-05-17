@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:futurewrold/view/system/getAllSystemAD.dart';
+import 'package:futurewrold/view/teacher/group/select/SelectMyGroupPage.dart';
 import 'package:futurewrold/view/teacher/myInformation/MyPage.dart';
 import 'package:futurewrold/view/teacher/project/myProject/PorjectCard.dart';
 import 'package:futurewrold/view/teacher/project/myProject/SelectMyProject.dart';
@@ -54,7 +55,7 @@ class TeacherFirstPageState extends State<TeacherFirstPage> {
     BottomNavigationBarItem(
       backgroundColor: Colors.blue,
       icon: Icon(Icons.home),
-      title: Text("首页"),
+      title: Text("群组"),
     ),
     BottomNavigationBarItem(
       backgroundColor: Colors.blue[600],
@@ -75,7 +76,7 @@ class TeacherFirstPageState extends State<TeacherFirstPage> {
 
   //点击导航项是要显示的页面
   final pages = [
-    ChildItemView("首页"),
+    SelectMyGroupPage(),
     SelectMyProject(),
     GetAllSystemAD(),
     MyPage()
