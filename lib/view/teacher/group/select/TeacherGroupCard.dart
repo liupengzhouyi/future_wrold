@@ -30,9 +30,17 @@ class _TeacherGroupCardState extends State<TeacherGroupCard> {
     );
   }
 
-
   void createCard() {
-
+    page = ListTile(
+      leading: CircleAvatar(
+        backgroundImage: NetworkImage(returnObject.imageurl),
+      ),
+      title: new Text(returnObject.name),
+      trailing: new Icon(Icons.arrow_forward_ios),
+    );
+    setState(() {
+      page;
+    });
   }
 
 

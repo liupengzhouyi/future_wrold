@@ -33,9 +33,7 @@ class _SelectMyGroupPageState extends State<SelectMyGroupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text("我的群组"),
-      ),
+      // appBar: AppBar(title: Text("我的群组"),),
       body: page,
     );
   }
