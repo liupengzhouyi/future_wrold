@@ -62,7 +62,7 @@ class _SelectMyGroupPageState extends State<SelectMyGroupPage> {
 
 
   void createSuccessPage(List<ReturnObject> list) {
-    page = TeacherGroupList(list);
+    page = TeacherGroupList(list, tempUserInformation.userNumber);
     setState(() {
       page;
     });
