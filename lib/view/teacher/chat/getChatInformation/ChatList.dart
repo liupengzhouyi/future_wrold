@@ -60,7 +60,6 @@ class _ChatListState extends State<ChatList> {
 
 
   createListPage(List<ReturnObject> list) {
-
     page = ChatListView(myNumber, list);
     setState(() {
       page;

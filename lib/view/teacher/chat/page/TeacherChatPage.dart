@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/teacher/chat/chatting/SendChat.dart';
+import 'package:futurewrold/model/teacher/chat/getChatInformation/ReturnObject.dart';
+import 'package:futurewrold/model/teacher/chat/getChatInformation/ReturnTeacherGetChat.dart';
+import 'package:futurewrold/model/teacher/chat/getChatInformation/TeacherGetChat.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
 import 'package:futurewrold/view/teacher/chat/chatting/Chatting.dart';
 import 'package:futurewrold/view/teacher/chat/getChatInformation/ChatList.dart';
+import 'package:futurewrold/view/teacher/chat/getChatInformation/ChatListView.dart';
 
 class TeacherChatPage extends StatefulWidget {
 
-  TeacherChatPage(this.groupId, this.groupName, this.myNumber);
+  TeacherChatPage(this.groupId, this.groupName, this.myNumber , {Key key}) : super(key : key);
 
   String myNumber;
   String groupId;
@@ -26,17 +32,8 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
 
   Widget allPage;
 
-  @override
-  void initState() {
-    page = new Center(
-      child: Icon(Icons.list, color: Colors.lightBlueAccent, size: 64,),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    createChatPage();
-    return Scaffold(
+  void CreateAll() {
+    allPage = Scaffold(
       appBar: AppBar(
         title: Text(groupName),
         centerTitle: true,
@@ -49,18 +46,92 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
             new Divider(height: 1.0),
             new Container(
               decoration: new BoxDecoration(
-                color: Theme.of(context).cardColor,),
-              child: _buildTextComposer(),
+                color: Theme.of(context).cardColor,
+              ),
+              child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: new Row(
+                      children: <Widget> [
+                        new Flexible(
+                            child: new TextField(
+                              controller: _textController,
+                              // onSubmitted: _handleSubmitted,
+                              decoration: new InputDecoration.collapsed(hintText: '发送消息'),
+                            )
+                        ),
+                        new Container(
+                          margin: new EdgeInsets.symmetric(horizontal: 4.0),
+                          child: new IconButton(
+                              icon: new Icon(Icons.send),
+                              onPressed: () async {
+                                // _handleSubmitted();
+                                if (_textController.text.length != 0) {
+                                  Chatting chatting = new Chatting(2.toString(), groupId, myNumber, _textController.text);
+                                  // String ll = chatting.send() as String;
+                                  var result = await HttpUtils.request(
+                                    '/chat/add',
+                                    method: HttpUtils.POST,
+                                    data: chatting.chat.toJson(),
+                                  );
+                                  SendChat sendChat = SendChat.fromJson(result);
+                                  if (sendChat.returnKey != true) {
+                                    showDialog<Null>(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: new Text('发送信息'),
+                                          content: new SingleChildScrollView(
+                                            child: new ListBody(
+                                              children: <Widget>[
+                                                new Text('发送失败'),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: <Widget>[
+                                            new FlatButton(
+                                              child: new Text('确定'),
+                                              onPressed: () {
+                                                // applicationPaperFunction();
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ).then((val) {
+                                      print(val);
+                                    });
+                                  } else {
+                                    createChatPage();
+                                    _textController.clear();
+                                  }
+                                }
+                              }
+                          ),
+                        )
+                      ]
+                  )
+              ),
             )
           ]
       ),
     );
+    setState(() {
+      allPage;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    createChatPage();
+    CreateAll();
+    return allPage;
   }
 
   final TextEditingController _textController = new TextEditingController();
 
   void _handleSubmitted() {
-    // print('123:' + _textController.text.length.toString());
     if (_textController.text.length != 0) {
       Chatting chatting = new Chatting(2.toString(), groupId, myNumber, _textController.text);
       if (chatting.key == false) {
@@ -93,44 +164,13 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
         });
       } else {
         _textController.clear();
-      }
-      Future.delayed(Duration(seconds: 2), (){
         createChatPage();
-        print('延时2s执行');
-      });
+      }
     }
-
-  }
-
-  Widget _buildTextComposer() {
-    return new Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: new Row(
-            children: <Widget> [
-              new Flexible(
-                  child: new TextField(
-                    controller: _textController,
-                    // onSubmitted: _handleSubmitted,
-                    decoration: new InputDecoration.collapsed(hintText: '发送消息'),
-                  )
-              ),
-              new Container(
-                margin: new EdgeInsets.symmetric(horizontal: 4.0),
-                child: new IconButton(
-                    icon: new Icon(Icons.send),
-                    onPressed: () {
-                      _handleSubmitted();
-                    }
-                ),
-              )
-            ]
-        )
-    );
   }
 
   void createChatPage() {
-    print('。。。。。。。');
-    page = ChatList(groupId, myNumber);
+    page = new ChatList(groupId, myNumber);
     setState(() {
       page;
     });

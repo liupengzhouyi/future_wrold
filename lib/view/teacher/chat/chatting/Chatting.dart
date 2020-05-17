@@ -22,7 +22,6 @@ class Chatting {
     chat.information = information;
     chat.authorid = int.parse(userNumber);
     chat.groupid = int.parse(groupId);
-    send();
   }
 
 
@@ -33,9 +32,7 @@ class Chatting {
       data: chat.toJson(),
     );
     SendChat sendChat = SendChat.fromJson(result);
-    if (sendChat.returnKey == true) {
-      key = true;
-    }
+    return sendChat.returnKey.toString();
   }
 
 }
