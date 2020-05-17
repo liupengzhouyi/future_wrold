@@ -28,6 +28,7 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
     page = new Center(
       child: Icon(Icons.list, color: Colors.lightBlueAccent, size: 64,),
     );
+    createChatPage();
   }
 
   @override
@@ -40,6 +41,9 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
   }
 
   void createChatPage() {
-    ChatList(groupId, myNumber);
+    page = ChatList(groupId, myNumber);
+    setState(() {
+      page;
+    });
   }
 }
