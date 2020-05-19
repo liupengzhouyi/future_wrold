@@ -4,7 +4,6 @@ import 'package:futurewrold/utils/web/HttpUtils.dart';
 import 'package:futurewrold/view/student/chat/chatting/Chatting.dart';
 import 'package:futurewrold/view/student/chat/getChatInformation/ChatList.dart';
 
-
 class StudentChatPage extends StatefulWidget {
 
   StudentChatPage(this.groupId, this.groupName, this.myNumber , {Key key}) : super(key : key);
