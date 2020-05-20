@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/view/student/myProject/information/MyPaperPage.dart';
 import 'package:futurewrold/view/student/myProject/information/InformationPro.dart';
+import 'package:futurewrold/view/student/rePassword/studentRePassword.dart';
 import 'package:futurewrold/view/student/teacher/select/college/getTeacherAllByCollege.dart';
 import 'package:futurewrold/view/student/teacher/select/professional/getTeacherByProfessional.dart';
 import 'package:path_provider/path_provider.dart';
@@ -125,7 +126,7 @@ class _MyPageState extends State<MyPage> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10) //设置圆角
           ),
-          onPressed: () => print("圆角按钮"),
+          onPressed: () => StudentRePassword(userInformation.userNumber),
         ),
         SizedBox(height: 20,),
         RaisedButton(
