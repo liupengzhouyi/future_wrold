@@ -17,8 +17,12 @@ class _TeacherRePasswordState extends State<TeacherRePassword> {
   String teacherNumber;
 
   final _formKey = GlobalKey<FormState>();
-  Color _eyeColor;
-  bool _isClickEye = false;
+  Color _eyeColor0;
+  Color _eyeColor1;
+  Color _eyeColor2;
+  bool _isClickEye1 = false;
+  bool _isClickEye2 = false;
+  bool _isClickEye3 = false;
   String password;
   String password1;
   String password2;
@@ -50,7 +54,7 @@ class _TeacherRePasswordState extends State<TeacherRePassword> {
 
   TextFormField initLoginPWD0(){
     return TextFormField(
-      obscureText: _isClickEye,
+      obscureText: _isClickEye1,
       onSaved: (String value) => password = value,
       validator: (String value){
         if(value.isEmpty){
@@ -60,11 +64,11 @@ class _TeacherRePasswordState extends State<TeacherRePassword> {
       decoration: InputDecoration(
         labelText: '原密码',
         suffixIcon: IconButton(
-            icon: Icon(Icons.remove_red_eye,color: _eyeColor),
+            icon: Icon(Icons.remove_red_eye,color: _eyeColor0),
             onPressed:(){
               setState(() {
-                _isClickEye = !_isClickEye;
-                _eyeColor = _isClickEye ? Colors.grey: Colors.blue;
+                _isClickEye1 = !_isClickEye1;
+                _eyeColor0 = _isClickEye1 ? Colors.grey: Colors.blue;
               });
             }
         ),
@@ -74,7 +78,7 @@ class _TeacherRePasswordState extends State<TeacherRePassword> {
 
   TextFormField initLoginPWD1(){
     return TextFormField(
-      obscureText: _isClickEye,
+      obscureText: _isClickEye2,
       onSaved: (String value) => password1 = value,
       validator: (String value){
         if(value.isEmpty){
@@ -84,11 +88,11 @@ class _TeacherRePasswordState extends State<TeacherRePassword> {
       decoration: InputDecoration(
         labelText: '新密码',
         suffixIcon: IconButton(
-            icon: Icon(Icons.remove_red_eye,color: _eyeColor),
+            icon: Icon(Icons.remove_red_eye,color: _eyeColor1),
             onPressed:(){
               setState(() {
-                _isClickEye = !_isClickEye;
-                _eyeColor = _isClickEye ? Colors.grey: Colors.blue;
+                _isClickEye2 = !_isClickEye2;
+                _eyeColor1 = _isClickEye2 ? Colors.grey: Colors.blue;
               });
             }
         ),
@@ -98,7 +102,7 @@ class _TeacherRePasswordState extends State<TeacherRePassword> {
 
   TextFormField initLoginPWD2(){
     return TextFormField(
-      obscureText: _isClickEye,
+      obscureText: _isClickEye3,
       onSaved: (String value) => password2 = value,
       validator: (String value){
         if(value.isEmpty){
@@ -108,11 +112,11 @@ class _TeacherRePasswordState extends State<TeacherRePassword> {
       decoration: InputDecoration(
         labelText: '确认密码',
         suffixIcon: IconButton(
-            icon: Icon(Icons.remove_red_eye,color: _eyeColor),
+            icon: Icon(Icons.remove_red_eye,color: _eyeColor2),
             onPressed:(){
               setState(() {
-                _isClickEye = !_isClickEye;
-                _eyeColor = _isClickEye ? Colors.grey: Colors.blue;
+                _isClickEye3 = !_isClickEye3;
+                _eyeColor2 = _isClickEye3? Colors.grey: Colors.blue;
               });
             }
         ),
@@ -141,6 +145,4 @@ class _TeacherRePasswordState extends State<TeacherRePassword> {
       ),
     );
   }
-
-
 }
