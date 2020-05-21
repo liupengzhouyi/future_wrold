@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/main.dart';
+import 'package:futurewrold/model/teacher/rePassword/ReturnTeacherRePasswordEntity.dart';
+import 'package:futurewrold/model/teacher/rePassword/Teacher.dart';
+import 'package:futurewrold/model/teacher/rePassword/TeacherRePasswordEntity.dart';
+import 'package:futurewrold/utils/web/HttpUtils.dart';
 
 class TeacherRePassword extends StatefulWidget {
 
@@ -136,13 +141,88 @@ class _TeacherRePasswordState extends State<TeacherRePassword> {
             //CommonUtils.showToast(context, '登录');
             if(_formKey.currentState.validate()){
               _formKey.currentState.save();
-              // CommonUtils.showToast(context, _userName+"----"+_pwd);
+              TeacherRePasswordEntity teacherRePasswordEntity = new TeacherRePasswordEntity();
+              Teacher teacher =  new Teacher();
+              teacher.teachernumber = teacherNumber;
+              teacherRePasswordEntity.password = password;
+              teacherRePasswordEntity.password1 = password1;
+              teacherRePasswordEntity.password2 = password2;
+              teacherRePasswordEntity.teacher = teacher;
+              rePass(teacherRePasswordEntity);
             }
-
           },
           shape: StadiumBorder(side: BorderSide(color: Colors.blueAccent)),
         ),
       ),
     );
   }
+
+
+  Future<void> rePass(TeacherRePasswordEntity teacherRePasswordEntity) async {
+    var result = await HttpUtils.request(
+      '/teacher/rePassword',
+      method: HttpUtils.POST,
+      data: teacherRePasswordEntity.toJson(),
+    );
+    ReturnTeacherRePasswordEntity returnTeacherRePasswordEntity = ReturnTeacherRePasswordEntity.fromJson(result);
+    if (returnTeacherRePasswordEntity.returnKey == true) {
+      password = '';
+      password1 = '';
+      password2 = '';
+      showDialog<Null>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text('教师修改密码'),
+            content: new SingleChildScrollView(
+              child: new Center(
+                child: Text(returnTeacherRePasswordEntity.why + '下次登陆生效'),
+              ),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('确定'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      ).then((val) {
+        print(val);
+      });
+    } else {
+      password = '';
+      password1 = '';
+      password2 = '';
+      showDialog<Null>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text('教师修改密码'),
+            content: new SingleChildScrollView(
+              child: new Center(
+                child: Text(returnTeacherRePasswordEntity.why),
+              ),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('确定'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      ).then((val) {
+        print(val);
+      });
+    }
+  }
+
+
 }
