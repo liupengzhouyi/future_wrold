@@ -126,7 +126,13 @@ class _MyPageState extends State<MyPage> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10) //设置圆角
           ),
-          onPressed: () => StudentRePassword(userInformation.userNumber),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => StudentRePassword(userInformation.userNumber),
+              )
+            );
+          }
         ),
         SizedBox(height: 20,),
         RaisedButton(
