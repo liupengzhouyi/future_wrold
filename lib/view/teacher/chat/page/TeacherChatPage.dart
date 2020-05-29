@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/teacher/chat/addNumber/AddGroupNumber.dart';
+import 'package:futurewrold/model/teacher/chat/addNumber/ReturnAddGroupNumber.dart';
 import 'package:futurewrold/model/teacher/chat/chatting/SendChat.dart';
 import 'package:futurewrold/model/teacher/chat/getChatInformation/ReturnObject.dart';
 import 'package:futurewrold/model/teacher/chat/getChatInformation/ReturnTeacherGetChat.dart';
@@ -27,16 +29,83 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
   String myNumber;
   String groupId;
   String groupName;
-
+  TextEditingController unameController = new TextEditingController();
   Widget page;
-
+  Widget itemInAddNumber;
   Widget allPage;
 
   void CreateAll() {
+    itemInAddNumber = TextFormField(
+      autofocus: false,
+      // keyboardType: TextInputType.number,
+      //键盘回车键的样式
+      textInputAction: TextInputAction.next,
+      controller: unameController,
+    );
     allPage = Scaffold(
       appBar: AppBar(
         title: Text(groupName),
         centerTitle: true,
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.add), onPressed: () {
+              showDialog<Null>(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: new Text('添加群组成员'),
+                    content: new SingleChildScrollView(
+                      child: new ListBody(
+                        children: <Widget>[
+                          new Text('新成员编号'),
+                          itemInAddNumber,
+                        ],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      new FlatButton(
+                        child: new Text('取消'),
+                        onPressed: () {
+                          // applicationPaperFunction();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      new FlatButton(
+                        child: new Text('确定'),
+                        onPressed: () async {
+                          AddGroupNumber temtAddGroupNumber = new AddGroupNumber();
+                          temtAddGroupNumber.studentid = int.parse(unameController.text);
+                          temtAddGroupNumber.groupid = int.parse(groupId);
+                          temtAddGroupNumber.id = 0;
+                          unameController.clear();
+                          var result = await HttpUtils.request(
+                            '/groupnumber/add',
+                            method: HttpUtils.POST,
+                            data: temtAddGroupNumber.toJson(),
+                          );
+                          ReturnAddGroupNumber returnAddGroupNumber = ReturnAddGroupNumber.fromJson(result);
+                          if (returnAddGroupNumber.returnKey == true) {
+                            itemInAddNumber = Text('添加成功', style: TextStyle(color: Colors.green, fontSize: 32),);
+                            setState(() {
+                              itemInAddNumber;
+                            });
+                          } else {
+                            itemInAddNumber = Text('添加失败', style: TextStyle(color: Colors.red, fontSize: 32),);
+                            setState(() {
+                              itemInAddNumber;
+                            });
+                          }
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ).then((val) {
+                print(val);
+              });
+            }),
+          ],
       ),
       body: new Column(
           children: <Widget>[
