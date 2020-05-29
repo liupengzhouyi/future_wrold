@@ -148,9 +148,28 @@ class _ApplicationPaperDialogState extends State<ApplicationPaperDialog> {
           ),
           new FlatButton(
             child: new Text('确定'),
-            onPressed: () {
-              applicationPaperFunction();
-              // Navigator.of(context).pop();
+            onPressed: () async {
+              // applicationPaperFunction();
+              ApplicationPaper applicationPaper = new ApplicationPaper();
+              applicationPaper.id = 0;
+              applicationPaper.pass = 0;
+              applicationPaper.applicationdata = "";
+              applicationPaper.passdata = "";
+              applicationPaper.titleid = int.parse(paperId);
+              applicationPaper.studentid = int.parse(tempUserInformation.userNumber);
+              print('applicationPaper.toJson():' + applicationPaper.toJson().toString());
+              var result = await HttpUtils.request(
+                '/selecttitle/add',
+                method: HttpUtils.POST,
+                data: applicationPaper.toJson(),
+              );
+              ReturnApplicationPaper returnApplicationPaper = ReturnApplicationPaper.fromJson(result);
+              if (returnApplicationPaper.returnKey == true) {
+                applicarionSuccess();
+              } else {
+                applicarionError(returnApplicationPaper.why);
+              }
+              Navigator.of(context).pop();
             },
           ),
         ],
@@ -219,8 +238,7 @@ class _ApplicationPaperDialogState extends State<ApplicationPaperDialog> {
         ),
         new FlatButton(
           child: new Text('确定'),
-          onPressed: () {
-            applicationPaperFunction();
+          onPressed: () async {
             Navigator.of(context).pop();
           },
         ),
