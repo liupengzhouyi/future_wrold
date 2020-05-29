@@ -60,7 +60,7 @@ class TeacherFirstPageState extends State<TeacherFirstPage> {
     BottomNavigationBarItem(
       backgroundColor: Colors.blue[600],
       icon: Icon(Icons.format_indent_increase),
-      title: Text("发现"),
+      title: Text("题目"),
     ),
     BottomNavigationBarItem(
       backgroundColor: Colors.blue[800],

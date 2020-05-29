@@ -106,7 +106,7 @@ class _MyPageState extends State<MyPage> {
             }
         ),
         SizedBox(height: 20,),
-        RaisedButton(
+        /*RaisedButton(
           color: Colors.lightGreenAccent,
           child: Text("添加题目"),
           shape: RoundedRectangleBorder(
@@ -120,7 +120,7 @@ class _MyPageState extends State<MyPage> {
             );
           },
         ),
-        SizedBox(height: 20,),
+        SizedBox(height: 20,),*/
         RaisedButton(
           child: Text("修改密码"),
           shape: RoundedRectangleBorder(

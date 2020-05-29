@@ -85,17 +85,62 @@ class _TeacherChatPageState extends State<TeacherChatPage> {
                           );
                           ReturnAddGroupNumber returnAddGroupNumber = ReturnAddGroupNumber.fromJson(result);
                           if (returnAddGroupNumber.returnKey == true) {
-                            itemInAddNumber = Text('添加成功', style: TextStyle(color: Colors.green, fontSize: 32),);
-                            setState(() {
-                              itemInAddNumber;
+                            Navigator.of(context).pop();
+                            showDialog<Null>(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: new Text('添加群组成员'),
+                                  content: new SingleChildScrollView(
+                                    child: new ListBody(
+                                      children: <Widget>[
+                                        Text('添加成功', style: TextStyle(color: Colors.green, fontSize: 32),),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      child: new Text('确定'),
+                                      onPressed: () async {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            ).then((val) {
+                              print(val);
                             });
                           } else {
-                            itemInAddNumber = Text('添加失败', style: TextStyle(color: Colors.red, fontSize: 32),);
-                            setState(() {
-                              itemInAddNumber;
+                            Navigator.of(context).pop();
+                            showDialog<Null>(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: new Text('添加群组成员'),
+                                  content: new SingleChildScrollView(
+                                    child: new ListBody(
+                                      children: <Widget>[
+                                      Text('添加失败', style: TextStyle(color: Colors.red, fontSize: 32),),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      child: new Text('确定'),
+                                      onPressed: () async {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            ).then((val) {
+                              print(val);
                             });
                           }
-                          Navigator.of(context).pop();
                         },
                       ),
                     ],

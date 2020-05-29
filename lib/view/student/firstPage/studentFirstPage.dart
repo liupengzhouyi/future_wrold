@@ -1,7 +1,13 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:futurewrold/model/user/UserInformation.dart';
 import 'package:futurewrold/view/student/group/select/SelectMyGroupPage.dart';
 import 'package:futurewrold/view/student/myInformation/MyPage.dart';
+import 'package:futurewrold/view/student/myProject/information/MyPaperPage.dart';
 import 'package:futurewrold/view/system/getAllSystemAD.dart';
+import 'package:path_provider/path_provider.dart';
 
 
 void main() => runApp(MyApp());
@@ -31,6 +37,9 @@ class StudentFirstPage extends StatefulWidget {
 }
 
 class StudentFirstPageState extends State<StudentFirstPage> {
+
+  UserInformation userInformation;
+
   StudentFirstPageState();
 
   @override
@@ -55,11 +64,11 @@ class StudentFirstPageState extends State<StudentFirstPage> {
       icon: Icon(Icons.home),
       title: Text("群组"),
     ),
-    BottomNavigationBarItem(
+    /*BottomNavigationBarItem(
       backgroundColor: Colors.blue[600],
       icon: Icon(Icons.format_indent_increase),
-      title: Text("发现"),
-    ),
+      title: Text("毕设"),
+    ),*/
     BottomNavigationBarItem(
       backgroundColor: Colors.blue[800],
       icon: Icon(Icons.message),
@@ -75,12 +84,13 @@ class StudentFirstPageState extends State<StudentFirstPage> {
   //点击导航项是要显示的页面
   final pages = [
     SelectMyGroupPage(),
-    ChildItemView("发现"),
+    // MyPaperPage(userInformation.userNumber.toString()),
     GetAllSystemAD(),
     MyPage()
   ];
 
   Widget buildBottomTabScaffold() {
+    // readCounter();
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: bottomNavItems,
@@ -107,6 +117,48 @@ class StudentFirstPageState extends State<StudentFirstPage> {
       });
     }
   }
+
+  // _getLocalFile函数，获取本地文件目录
+  /*Future<File> _getLocalFile() async {
+    // 获取本地文档目录
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    print(dir);
+    // 返回本地文件目录
+    return new File('$dir/userInformation.txt');
+  }
+
+  void readCounter() async {
+    try {
+      File file = await _getLocalFile();
+      var dir_bool = await file.exists();
+      if (!dir_bool) {
+        file.create();
+        userInformation = new UserInformation();
+        userInformation.landing = 0;
+        saveValue(userInformation);
+      }
+      // 从文件中读取变量作为字符串，一次全部读完存在内存里面
+      var contents = await file.readAsString();
+      var jsonMap = await json.decode(contents);
+      setState(() {
+        userInformation = UserInformation.fromJson(jsonMap);
+      });
+    } on FileSystemException {
+    }
+  }
+
+  // 保存登陆数据
+  void saveValue(UserInformation userInformation) async {
+    try {
+      File f = await _getLocalFile();
+      IOSink slink = f.openWrite(mode: FileMode.append);
+      slink.write('${userInformation.toString()}');
+      slink.close();
+    } catch (e) {
+      // 写入错误
+      print(e);
+    }
+  }*/
 }
 
 //子页面
