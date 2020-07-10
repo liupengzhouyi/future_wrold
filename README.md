@@ -1,16 +1,12 @@
 # futurewrold
 
-A new Flutter application for Ord world.
+## 项目已经结束了！
 
-## Getting Started
+### 效果展示
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+![截屏2020-07-10 下午9.39.35](https://tva1.sinaimg.cn/large/007S8ZIlly1ggm7i7axo3j30zi0teasg.jpg)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![截屏2020-07-10 下午9.40.30](https://tva1.sinaimg.cn/large/007S8ZIlly1ggm7iw92wdj31000quqh6.jpg)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![截屏2020-07-10 下午9.40.13](https://tva1.sinaimg.cn/large/007S8ZIlly1ggm7ik6j0qj30ze0pee07.jpg)
